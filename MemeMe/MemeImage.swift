@@ -23,10 +23,10 @@ struct MemeImage {
     var origImage: UIImage!
     
     //output image from method 'createMeme' also required
-    var memeImage: UIImage!
+    var memedImage: UIImage!
     
     func createMeme(topText: String, bottomText: String, image: UIImage) -> UIImage {
         //add code to create new image
-        return memeImage
+        return memedImage
     }
 }
