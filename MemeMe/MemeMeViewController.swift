@@ -15,6 +15,8 @@ class MemeMeViewController: UIViewController {
     //App allows for all Meme'ed images to be recalled at any time
     //App allows user to share meme'ed images with friends
 
+    var testMemeImage: MemeImage!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
