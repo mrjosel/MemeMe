@@ -26,11 +26,11 @@ struct MemeImage {
     
     //all variables of MemeImage struct
     //Top and bottom strings, one or more could be optional
-    var topText: String!
-    var bottomText: String!
+    var topText: String
+    var bottomText: String
     
     //Image from user, required from user, struct can't be instanced until image is present
-    var origImage: UIImage!
+    var origImage: UIImage
     
     //output image from method 'createMeme'
     var memedImage: UIImage?
