@@ -9,12 +9,23 @@
 import UIKit
 
 class ImageSelectViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    //Outlets
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var pickButton: UIBarButtonItem!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
+    @IBOutlet weak var topTextField: UITextField!
+    @IBOutlet weak var bottomTextField: UITextField!
     
+    //memeImage object
     var memeImage = MemeImage()
+    
+    //TODO  - incorporate textDelegates
+    //      - save all info to memeImage
+    //      - implement save and cancel buttons
+    //      - hid pick button while editing text????
+    //      - center pick/camera buttons, add icons instead of text
     
     override func viewWillAppear(animated: Bool) {
         //limits camera button in simulator, only allows on HW where camera is suported
@@ -24,18 +35,28 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        //hide textFields from view until image is picked
+        if self.imageView.image == nil {
+            self.topTextField.hidden = true
+            self.bottomTextField.hidden = true
+        } else {    //reveal textfields if image is selected THIS IS BACKUP, DOES NOT WORK, CAN BE DELETED
+            self.topTextField.hidden = false
+            self.bottomTextField.hidden = false
+        }
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-        //loads UIImagePickerController view
+        //presents chosen image to view, reveals textFeilds for editing
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            println("here")
             self.imageView.image = image
             self.memeImage.origImage = image
             self.imageView.contentMode = UIViewContentMode.ScaleAspectFit
         }
-        self.dismissViewControllerAnimated(true, completion: nil)
-        println(self.memeImage)
+        self.dismissViewControllerAnimated(true, completion: nil)   //dismisses pickerController
+        //reveals textFields for editing
+        self.topTextField.hidden = false
+        self.bottomTextField.hidden = false
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
