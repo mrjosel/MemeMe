@@ -9,12 +9,7 @@
 import UIKit
 
 class TextEditViewController: UIViewController, UITextFieldDelegate {
-    
-    //debug, remove later
-    @IBOutlet weak var topTextButton: UIButton!
-    @IBOutlet weak var bottomTextButton: UIButton!
-    
-    
+
     //Text Field Oulets
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
@@ -34,16 +29,11 @@ class TextEditViewController: UIViewController, UITextFieldDelegate {
         self.unsubscribeFromKeyboardNotifications() //remove keyboard notification subscriptions from other views
     }
     
-    //---------debug, remove later
+    //---------rename and reutilize as saveMemeImage
     @IBAction func printTopText(sender: UIButton) {
         self.memeImage = MemeImage(userTopText: self.topTextField.text, userBottomText: self.bottomTextField.text, userImage: UIImage())
         println(self.memeImage)
     }
-    
-    @IBAction func bottomTextButton(sender: UIButton) {
-        println(self.bottomTextField.text)
-    }
-    //-------------------------------
     
     //-----Following methods all related to resizing view when keyboard appeara/dissappers
     func subscribeToKeyboardNotifications() {
