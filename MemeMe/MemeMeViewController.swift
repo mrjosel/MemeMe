@@ -18,6 +18,10 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     
+    //testField delegates
+    let topTextFieldDelegate = MemeTextDelegate()
+    let bottomTextFieldDelegate = MemeTextDelegate()
+    
     //memeImage object
     var memeImage = MemeImage()
     
@@ -35,6 +39,41 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        //Set Delegates
+        self.topTextField.delegate = self.topTextFieldDelegate
+        self.bottomTextField.delegate = self.bottomTextFieldDelegate
+        
+        //set textField attributes (font, size, etc)
+        let memeTextAttributes = [
+            NSStrokeColorAttributeName : UIColor.blackColor(),
+            NSForegroundColorAttributeName : UIColor.whiteColor(),
+            NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+            NSStrokeWidthAttributeName : 3.0
+        ]
+        
+        //assign attributes to textFields
+        self.topTextField.defaultTextAttributes = memeTextAttributes
+        self.bottomTextField.defaultTextAttributes = memeTextAttributes
+        
+        //Set individual fields delegate properties for TOP and BOTTOM
+        self.topTextFieldDelegate.position = .Top
+        self.bottomTextFieldDelegate.position = .Bottom
+        
+        //Make Clear buttons hidden unless delegate displays them
+        //REMOVED FOR NOW, MAY IMPLEMENT IN FINAL VERSION
+        //        topTextField.clearButtonMode = UITextFieldViewMode.WhileEditing
+        //        topTextField.clearButtonMode = UITextFieldViewMode.WhileEditing
+        
+        //Set Text Allignment
+        self.topTextField.textAlignment = NSTextAlignment.Center
+        self.bottomTextField.textAlignment = NSTextAlignment.Center
+        
+        //Set default text
+        //TODO - Implement in delegate class later
+        self.topTextField.text = "TOP"
+        self.bottomTextField.text = "BOTTOM"
+
         
         //hide textFields from view until image is picked
         if self.imageView.image == nil {
