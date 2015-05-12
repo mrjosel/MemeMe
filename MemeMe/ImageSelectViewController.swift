@@ -14,7 +14,7 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     
-    var testMemeImage = MemeImage()
+    var memeImage = MemeImage()
     
     override func viewWillAppear(animated: Bool) {
         //limits camera button in simulator, only allows on HW where camera is suported
@@ -31,11 +31,11 @@ class ImageSelectViewController: UIViewController, UIImagePickerControllerDelega
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             println("here")
             self.imageView.image = image
-            self.testMemeImage.origImage = image
-            self.imageView.contentMode = UIViewContentMode.ScaleAspectFill
+            self.memeImage.origImage = image
+            self.imageView.contentMode = UIViewContentMode.ScaleAspectFit
         }
         self.dismissViewControllerAnimated(true, completion: nil)
-        println(self.testMemeImage)
+        println(self.memeImage)
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {

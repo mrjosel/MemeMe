@@ -2,12 +2,13 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="GQf-8f-boS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Meme Me View Controller-->
+        <!--Image Select View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="MemeMeViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="ImageSelectViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -15,12 +16,93 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cah-CV-4jo">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="600" id="R2X-LY-pwu"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem title="Pick" id="Qgo-Ph-79d">
+                                        <connections>
+                                            <action selector="imagePicker:" destination="vXZ-lx-hvc" id="tQJ-6a-RdN"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Camera" id="qMj-Sh-4Kz">
+                                        <connections>
+                                            <action selector="useCamera:" destination="vXZ-lx-hvc" id="CaE-hG-sJm"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="R2X-LY-pwu"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <exclude reference="R2X-LY-pwu"/>
+                                    </mask>
+                                </variation>
+                            </toolbar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8qe-7G-nyE">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Cah-CV-4jo" firstAttribute="top" secondItem="8qe-7G-nyE" secondAttribute="bottom" id="3yp-n5-9GO"/>
+                            <constraint firstItem="8qe-7G-nyE" firstAttribute="leading" secondItem="Cah-CV-4jo" secondAttribute="leading" id="3zU-eo-Ymj"/>
+                            <constraint firstAttribute="trailing" secondItem="8qe-7G-nyE" secondAttribute="trailing" id="CoA-yT-3Ew"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Cah-CV-4jo" secondAttribute="trailing" constant="-216" id="NER-Kq-Llm">
+                                <variation key="widthClass=compact" constant="-200"/>
+                            </constraint>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Cah-CV-4jo" secondAttribute="bottom" id="ZQd-mS-LrQ"/>
+                            <constraint firstItem="Cah-CV-4jo" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="aZv-DS-a95">
+                                <variation key="widthClass=compact" constant="-16"/>
+                            </constraint>
+                            <constraint firstItem="8qe-7G-nyE" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="ekd-5b-lf9"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="8qe-7G-nyE"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="3zU-eo-Ymj"/>
+                                <exclude reference="CoA-yT-3Ew"/>
+                                <exclude reference="ekd-5b-lf9"/>
+                                <exclude reference="3yp-n5-9GO"/>
+                                <exclude reference="NER-Kq-Llm"/>
+                                <exclude reference="aZv-DS-a95"/>
+                                <exclude reference="ZQd-mS-LrQ"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="8qe-7G-nyE"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="3zU-eo-Ymj"/>
+                                <include reference="CoA-yT-3Ew"/>
+                                <include reference="ekd-5b-lf9"/>
+                                <include reference="3yp-n5-9GO"/>
+                                <include reference="NER-Kq-Llm"/>
+                                <include reference="aZv-DS-a95"/>
+                                <include reference="ZQd-mS-LrQ"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="0dY-Oe-wVr"/>
+                    <connections>
+                        <outlet property="cameraButton" destination="qMj-Sh-4Kz" id="c0y-cX-xYt"/>
+                        <outlet property="imageView" destination="8qe-7G-nyE" id="1ch-3m-9WX"/>
+                        <outlet property="pickButton" destination="Qgo-Ph-79d" id="uK3-nn-m19"/>
+                        <outlet property="toolbar" destination="Cah-CV-4jo" id="Rrr-5N-XKC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="325.5" y="547"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MST-f7-2Yb">
