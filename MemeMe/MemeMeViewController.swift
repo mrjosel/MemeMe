@@ -26,7 +26,6 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
     var memeImage = MemeImage()
     
     //TODO  
-    //      - Add keyboard hide code
     //      - save all info to memeImage
     //      - implement save and cancel buttons
     //      - hid pick button while editing text????
@@ -35,6 +34,12 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
     override func viewWillAppear(animated: Bool) {
         //limits camera button in simulator, only allows on HW where camera is suported
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+        //subscribe to keyboard notifications to allow for resizing view when needed
+        self.subscribeToKeyboardNotifications()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.unsubscribeFromKeyboardNotifications() //remove keyboard notification subscriptions from other views
     }
     
     override func viewDidLoad() {
@@ -86,6 +91,41 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
         }
     }
     
+    //-----Following methods all related to resizing view when keyboard appeara/dissappers
+    func subscribeToKeyboardNotifications() {
+        //Keyboard show/hide notifications - func called in viewWillAppear
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func unsubscribeFromKeyboardNotifications() {
+        //removing keyboard show/hide notifications - func called in viewWillDisappear
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        //shrink view by size of keyboard to not obscure bottom field
+        if bottomTextField.editing {
+            self.view.frame.origin.y -= self.getKeyboardHeight(notification)
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        //resize view to original
+        if bottomTextField.editing {
+            self.view.frame.origin.y += self.getKeyboardHeight(notification)
+        }
+    }
+    
+    func getKeyboardHeight(notification: NSNotification) -> CGFloat {
+        //gets size of keyboard to be used in resizing the view
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
+        return keyboardSize.CGRectValue().height
+    }
+    //-----End of view resizing methods
+    
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         //presents chosen image to view, reveals textFeilds for editing
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
@@ -103,7 +143,6 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
         //dismisses view back to initial toolbar view
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
     
     @IBAction func imagePicker(sender: UIBarButtonItem) {
         //presents UIImagePickerController
