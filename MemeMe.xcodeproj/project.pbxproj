@@ -16,7 +16,6 @@
 		B757B70D1B01155E001171F2 /* MemeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B757B70C1B01155E001171F2 /* MemeImage.swift */; };
 		B757B7151B018DAF001171F2 /* TextEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B757B7141B018DAF001171F2 /* TextEditViewController.swift */; };
 		B757B7171B018DED001171F2 /* MemeTextDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B757B7161B018DED001171F2 /* MemeTextDelegate.swift */; };
-		B757B7191B018EA3001171F2 /* ImageSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B757B7181B018EA3001171F2 /* ImageSelectViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +42,6 @@
 		B757B70C1B01155E001171F2 /* MemeImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeImage.swift; sourceTree = "<group>"; };
 		B757B7141B018DAF001171F2 /* TextEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEditViewController.swift; sourceTree = "<group>"; };
 		B757B7161B018DED001171F2 /* MemeTextDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeTextDelegate.swift; sourceTree = "<group>"; };
-		B757B7181B018EA3001171F2 /* ImageSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSelectViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +86,6 @@
 				B720A9961AF14BB500580341 /* AppDelegate.swift */,
 				B720A9981AF14BB500580341 /* MemeMeViewController.swift */,
 				B757B7141B018DAF001171F2 /* TextEditViewController.swift */,
-				B757B7181B018EA3001171F2 /* ImageSelectViewController.swift */,
 				B757B7161B018DED001171F2 /* MemeTextDelegate.swift */,
 				B720A99A1AF14BB500580341 /* Main.storyboard */,
 				B720A99D1AF14BB500580341 /* Images.xcassets */,
@@ -224,7 +221,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B757B7191B018EA3001171F2 /* ImageSelectViewController.swift in Sources */,
 				B757B7171B018DED001171F2 /* MemeTextDelegate.swift in Sources */,
 				B757B70D1B01155E001171F2 /* MemeImage.swift in Sources */,
 				B757B7151B018DAF001171F2 /* TextEditViewController.swift in Sources */,
