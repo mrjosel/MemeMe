@@ -28,7 +28,8 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
     var memeImage = MemeImage()
     
     //TODO  
-    //      - implement cancel buttons
+    //      - implement default/toggle default method
+    //          -perhaps switch argument depending on button?
     //      - hide pick button while editing text????
     //      - center pick/camera buttons, add icons instead of text
     //      - render new memeImage
@@ -99,8 +100,28 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     @IBAction func saveMemeImage(sender: UIBarButtonItem) {
-        self.memeImage = MemeImage(userTopText: self.topTextField.text, userBottomText: self.bottomTextField.text, userImage: self.imageView.image!)
+        self.memeImage = MemeImage(userTopText: self.topTextField.text, userBottomText: self.bottomTextField.text, userImage: self.imageView.image!, memedImage: self.generateMemedImage())
         println(self.memeImage)
+    }
+    
+    func generateMemedImage() -> UIImage {
+        
+        // TODO: Hide toolbar and navbar
+        self.navigationController?.navigationBarHidden = true
+        self.toolbar.hidden = true
+        
+        // Render view to an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+        let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        // TODO:  Show toolbar and navbar
+        self.navigationController?.navigationBarHidden = false
+        self.toolbar.hidden = false
+        
+        
+        return memedImage
     }
     
     //-----Following methods all related to resizing view when keyboard appeara/dissappers

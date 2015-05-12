@@ -33,16 +33,17 @@ struct MemeImage {
     var origImage: UIImage
     
     //output image from method 'createMeme'
-    var memedImage: UIImage?
+    var memedImage: UIImage
     
     
     //Initializers
-    init(userTopText: String, userBottomText: String, userImage: UIImage) {
+    init(userTopText: String, userBottomText: String, userImage: UIImage, memedImage: UIImage) {
         //if user entered text for top and bottom strings, set the appropriate variables, else set to empty strings
         //memedImage is still not defined until MemeMeViewController creates memedImage
         self.topText = userTopText
         self.bottomText = userBottomText
         self.origImage = userImage
+        self.memedImage = memedImage
     }
     
         //Initialize with no params, should not ever need this
