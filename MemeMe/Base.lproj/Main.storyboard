@@ -33,6 +33,11 @@
                                             <action selector="useCamera:" destination="vXZ-lx-hvc" id="CaE-hG-sJm"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem title="Save" id="m7e-jF-ZbI">
+                                        <connections>
+                                            <action selector="saveMemeImage:" destination="vXZ-lx-hvc" id="kIc-XF-w78"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -51,12 +56,12 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sj0-Xh-Nfd">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8ui-9w-4z9">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -130,6 +135,7 @@
                         <outlet property="cameraButton" destination="qMj-Sh-4Kz" id="c0y-cX-xYt"/>
                         <outlet property="imageView" destination="8qe-7G-nyE" id="1ch-3m-9WX"/>
                         <outlet property="pickButton" destination="Qgo-Ph-79d" id="uK3-nn-m19"/>
+                        <outlet property="saveMemeImageButton" destination="m7e-jF-ZbI" id="qqg-u8-rtE"/>
                         <outlet property="toolbar" destination="Cah-CV-4jo" id="Rrr-5N-XKC"/>
                         <outlet property="topTextField" destination="Sj0-Xh-Nfd" id="zuS-uQ-IZU"/>
                     </connections>

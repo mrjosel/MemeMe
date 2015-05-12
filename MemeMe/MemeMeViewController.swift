@@ -13,6 +13,7 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
     //Outlets
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var pickButton: UIBarButtonItem!
+    @IBOutlet weak var saveMemeImageButton: UIBarButtonItem!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
@@ -85,10 +86,17 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
         if self.imageView.image == nil {
             self.topTextField.hidden = true
             self.bottomTextField.hidden = true
-        } else {    //reveal textfields if image is selected THIS IS BACKUP, DOES NOT WORK, CAN BE DELETED
+            self.saveMemeImageButton.enabled = false
+        } else {    //reveal textfields and save button if image is selected THIS IS BACKUP, DOES NOT WORK, CAN BE DELETED
             self.topTextField.hidden = false
             self.bottomTextField.hidden = false
+            self.saveMemeImageButton.enabled = true
         }
+    }
+    
+    @IBAction func saveMemeImage(sender: UIBarButtonItem) {
+        self.memeImage = MemeImage(userTopText: self.topTextField.text, userBottomText: self.bottomTextField.text, userImage: self.imageView.image!)
+        println(self.memeImage)
     }
     
     //-----Following methods all related to resizing view when keyboard appeara/dissappers
@@ -137,6 +145,8 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
         //reveals textFields for editing
         self.topTextField.hidden = false
         self.bottomTextField.hidden = false
+        //enables saveMemeImageButton
+        self.saveMemeImageButton.enabled = true
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
