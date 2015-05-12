@@ -14,6 +14,7 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var pickButton: UIBarButtonItem!
     @IBOutlet weak var saveMemeImageButton: UIBarButtonItem!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
@@ -27,10 +28,11 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
     var memeImage = MemeImage()
     
     //TODO  
-    //      - save all info to memeImage
-    //      - implement save and cancel buttons
-    //      - hid pick button while editing text????
+    //      - implement cancel buttons
+    //      - hide pick button while editing text????
     //      - center pick/camera buttons, add icons instead of text
+    //      - render new memeImage
+    //      - save/share functions
     
     override func viewWillAppear(animated: Bool) {
         //limits camera button in simulator, only allows on HW where camera is suported
@@ -87,10 +89,12 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
             self.topTextField.hidden = true
             self.bottomTextField.hidden = true
             self.saveMemeImageButton.enabled = false
+            self.cancelButton.enabled = false
         } else {    //reveal textfields and save button if image is selected THIS IS BACKUP, DOES NOT WORK, CAN BE DELETED
             self.topTextField.hidden = false
             self.bottomTextField.hidden = false
             self.saveMemeImageButton.enabled = true
+            self.cancelButton.enabled = false
         }
     }
     
@@ -145,14 +149,31 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
         //reveals textFields for editing
         self.topTextField.hidden = false
         self.bottomTextField.hidden = false
-        //enables saveMemeImageButton
+        //enables saveMemeImageButton, disable pickButton unless canceled is selected
         self.saveMemeImageButton.enabled = true
+        self.pickButton.enabled = false
+        self.cancelButton.enabled = true
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         //dismisses view back to initial toolbar view
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    @IBAction func cancelMeme(sender: UIBarButtonItem) {
+        self.memeImage = MemeImage()        //clears out memeImage content
+        self.imageView.image = UIImage()    //blank image
+        //restores default text
+        self.topTextField.text = "TOP"
+        self.topTextField.hidden = true
+        self.bottomTextField.text = "BOTTOM"
+        self.bottomTextField.hidden = true
+        //returns buttons back to original settings
+        self.pickButton.enabled = true
+        self.saveMemeImageButton.enabled = false
+        self.cancelButton.enabled = false
+    }
+    
     
     @IBAction func imagePicker(sender: UIBarButtonItem) {
         //presents UIImagePickerController

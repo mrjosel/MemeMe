@@ -38,6 +38,11 @@
                                             <action selector="saveMemeImage:" destination="vXZ-lx-hvc" id="kIc-XF-w78"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem title="Cancel" id="xuf-bJ-xuz">
+                                        <connections>
+                                            <action selector="cancelMeme:" destination="vXZ-lx-hvc" id="m9t-EP-1uL"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -133,6 +138,7 @@
                     <connections>
                         <outlet property="bottomTextField" destination="8ui-9w-4z9" id="YdY-EQ-EmW"/>
                         <outlet property="cameraButton" destination="qMj-Sh-4Kz" id="c0y-cX-xYt"/>
+                        <outlet property="cancelButton" destination="xuf-bJ-xuz" id="VcM-fS-KNZ"/>
                         <outlet property="imageView" destination="8qe-7G-nyE" id="1ch-3m-9WX"/>
                         <outlet property="pickButton" destination="Qgo-Ph-79d" id="uK3-nn-m19"/>
                         <outlet property="saveMemeImageButton" destination="m7e-jF-ZbI" id="qqg-u8-rtE"/>
