@@ -25,7 +25,8 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
     //memeImage object
     var memeImage = MemeImage()
     
-    //TODO  - incorporate textDelegates
+    //TODO  
+    //      - Add keyboard hide code
     //      - save all info to memeImage
     //      - implement save and cancel buttons
     //      - hid pick button while editing text????
