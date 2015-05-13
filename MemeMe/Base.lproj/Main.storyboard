@@ -144,11 +144,65 @@
                         <outlet property="saveMemeImageButton" destination="m7e-jF-ZbI" id="qqg-u8-rtE"/>
                         <outlet property="toolbar" destination="Cah-CV-4jo" id="Rrr-5N-XKC"/>
                         <outlet property="topTextField" destination="Sj0-Xh-Nfd" id="zuS-uQ-IZU"/>
+                        <segue destination="KnE-g1-b2b" kind="show" identifier="memeImageView" id="eCm-n4-cH9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="411" y="483"/>
+        </scene>
+        <!--Debug View Controller-->
+        <scene sceneID="tqO-tq-4hN">
+            <objects>
+                <viewController id="KnE-g1-b2b" customClass="DebugViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KxR-aY-TXu"/>
+                        <viewControllerLayoutGuide type="bottom" id="bkh-rX-OSf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2En-ab-2NQ">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lob-E2-ZvZ">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="lob-E2-ZvZ" firstAttribute="leading" secondItem="2En-ab-2NQ" secondAttribute="leading" id="7VN-Zl-OgF"/>
+                            <constraint firstItem="bkh-rX-OSf" firstAttribute="top" secondItem="lob-E2-ZvZ" secondAttribute="bottom" id="X8G-sr-bvt"/>
+                            <constraint firstItem="lob-E2-ZvZ" firstAttribute="top" secondItem="2En-ab-2NQ" secondAttribute="topMargin" id="egr-Om-jT3"/>
+                            <constraint firstAttribute="trailing" secondItem="lob-E2-ZvZ" secondAttribute="trailing" id="flD-hA-5ac"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="lob-E2-ZvZ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="7VN-Zl-OgF"/>
+                                <exclude reference="egr-Om-jT3"/>
+                                <exclude reference="flD-hA-5ac"/>
+                                <exclude reference="X8G-sr-bvt"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="lob-E2-ZvZ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="7VN-Zl-OgF"/>
+                                <include reference="egr-Om-jT3"/>
+                                <include reference="flD-hA-5ac"/>
+                                <include reference="X8G-sr-bvt"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="debugImageView" destination="lob-E2-ZvZ" id="hxF-6A-5A7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DEE-3o-8uF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1123.5" y="483"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MST-f7-2Yb">

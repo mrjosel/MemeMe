@@ -27,12 +27,12 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
     //memeImage object
     var memeImage = MemeImage()
     
-    //TODO  
+    //TODO
+    //      - render new memeImage properly with topTextField visible    
     //      - implement default/toggle default method
     //          -perhaps switch argument depending on button?
     //      - hide pick button while editing text????
     //      - center pick/camera buttons, add icons instead of text
-    //      - render new memeImage
     //      - save/share functions
     
     override func viewWillAppear(animated: Bool) {
@@ -101,7 +101,15 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     @IBAction func saveMemeImage(sender: UIBarButtonItem) {
         self.memeImage = MemeImage(userTopText: self.topTextField.text, userBottomText: self.bottomTextField.text, userImage: self.imageView.image!, memedImage: self.generateMemedImage())
-        println(self.memeImage)
+        self.performSegueWithIdentifier("memeImageView", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "memeImageView" {
+            let debugVC: DebugViewController = segue.destinationViewController as! DebugViewController
+            let data = self.memeImage
+            debugVC.testMemeImage = data
+        }
     }
     
     func generateMemedImage() -> UIImage {
@@ -109,6 +117,10 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
         // TODO: Hide toolbar and navbar
         self.navigationController?.navigationBarHidden = true
         self.toolbar.hidden = true
+        
+        //finish editing both textFields
+        self.topTextField.resignFirstResponder()
+        self.bottomTextField.resignFirstResponder()
         
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
