@@ -5,10 +5,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Meme Me View Controller-->
+        <!--Meme Edit View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="MemeMeViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="MemeEditViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -76,14 +76,15 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Sj0-Xh-Nfd" secondAttribute="trailing" constant="135" id="4Ot-fk-IfZ"/>
                             <constraint firstAttribute="trailing" secondItem="8qe-7G-nyE" secondAttribute="trailing" id="CoA-yT-3Ew"/>
                             <constraint firstItem="Cah-CV-4jo" firstAttribute="top" secondItem="8ui-9w-4z9" secondAttribute="bottom" constant="8" id="EFY-kZ-RoC"/>
+                            <constraint firstItem="Sj0-Xh-Nfd" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="Gbj-Cl-dwF"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Cah-CV-4jo" secondAttribute="trailing" constant="-216" id="NER-Kq-Llm">
                                 <variation key="widthClass=compact" constant="-200"/>
                             </constraint>
-                            <constraint firstItem="Sj0-Xh-Nfd" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="RwI-7I-ArZ"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Cah-CV-4jo" secondAttribute="bottom" id="ZQd-mS-LrQ"/>
                             <constraint firstItem="Cah-CV-4jo" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="aZv-DS-a95">
                                 <variation key="widthClass=compact" constant="-16"/>
                             </constraint>
+                            <constraint firstItem="8qe-7G-nyE" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="dVy-s4-23b"/>
                             <constraint firstItem="8qe-7G-nyE" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="ekd-5b-lf9"/>
                             <constraint firstItem="Sj0-Xh-Nfd" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="136" id="fVA-nj-ZVD"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8ui-9w-4z9" secondAttribute="trailing" constant="135" id="mZM-FB-t0P"/>
@@ -98,9 +99,10 @@
                             <mask key="constraints">
                                 <exclude reference="3zU-eo-Ymj"/>
                                 <exclude reference="CoA-yT-3Ew"/>
+                                <exclude reference="dVy-s4-23b"/>
                                 <exclude reference="ekd-5b-lf9"/>
                                 <exclude reference="4Ot-fk-IfZ"/>
-                                <exclude reference="RwI-7I-ArZ"/>
+                                <exclude reference="Gbj-Cl-dwF"/>
                                 <exclude reference="fVA-nj-ZVD"/>
                                 <exclude reference="mZM-FB-t0P"/>
                                 <exclude reference="u9U-48-Zrs"/>
@@ -120,9 +122,10 @@
                             <mask key="constraints">
                                 <include reference="3zU-eo-Ymj"/>
                                 <include reference="CoA-yT-3Ew"/>
+                                <include reference="dVy-s4-23b"/>
                                 <include reference="ekd-5b-lf9"/>
                                 <include reference="4Ot-fk-IfZ"/>
-                                <include reference="RwI-7I-ArZ"/>
+                                <include reference="Gbj-Cl-dwF"/>
                                 <include reference="fVA-nj-ZVD"/>
                                 <include reference="mZM-FB-t0P"/>
                                 <include reference="u9U-48-Zrs"/>
@@ -144,17 +147,17 @@
                         <outlet property="saveMemeImageButton" destination="m7e-jF-ZbI" id="qqg-u8-rtE"/>
                         <outlet property="toolbar" destination="Cah-CV-4jo" id="Rrr-5N-XKC"/>
                         <outlet property="topTextField" destination="Sj0-Xh-Nfd" id="zuS-uQ-IZU"/>
-                        <segue destination="KnE-g1-b2b" kind="show" identifier="memeImageView" id="eCm-n4-cH9"/>
+                        <segue destination="KnE-g1-b2b" kind="show" identifier="memeDetail" id="eCm-n4-cH9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="411" y="483"/>
         </scene>
-        <!--Debug View Controller-->
+        <!--Meme Detail View Controller-->
         <scene sceneID="tqO-tq-4hN">
             <objects>
-                <viewController id="KnE-g1-b2b" customClass="DebugViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="KnE-g1-b2b" customClass="MemeDetailViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KxR-aY-TXu"/>
                         <viewControllerLayoutGuide type="bottom" id="bkh-rX-OSf"/>
@@ -202,7 +205,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DEE-3o-8uF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1123.5" y="483"/>
+            <point key="canvasLocation" x="1348.5" y="483"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MST-f7-2Yb">

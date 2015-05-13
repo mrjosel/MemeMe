@@ -1,5 +1,5 @@
 //
-//  DebugViewController.swift
+//  MemeDetailViewController.swift
 //  MemeMe
 //
 //  Created by Brian Josel on 5/12/15.
@@ -8,17 +8,17 @@
 
 import UIKit
 
-class DebugViewController: UIViewController {
+class MemeDetailViewController: UIViewController {
     
     @IBOutlet weak var debugImageView: UIImageView!
-    var testMemeImage: MemeImage!
+    var loadedMeme: MemeImage!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.debugImageView.image = testMemeImage.memedImage
-        println(self.testMemeImage)
+        self.debugImageView.image = loadedMeme.memedImage
+        println(self.loadedMeme)
     }
 
     override func didReceiveMemoryWarning() {

@@ -1,5 +1,5 @@
 //
-//  MemeMeViewController.swift
+//  MemeEditViewController.swift
 //  MemeMe
 //
 //  Created by Brian Josel on 4/29/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     //Outlets
     @IBOutlet weak var toolbar: UIToolbar!
@@ -27,8 +27,17 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
     //memeImage object
     var memeImage = MemeImage()
     
+    //set textField attributes (font, size, etc)
+    let memeTextAttributes = [
+        NSStrokeColorAttributeName : UIColor.blackColor(),
+        NSForegroundColorAttributeName : UIColor.whiteColor(),
+        NSBackgroundColorAttributeName : UIColor.clearColor(),
+        NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+        NSStrokeWidthAttributeName : 3.0
+        
+    ]
+    
     //TODO
-    //      - render new memeImage properly with topTextField visible    
     //      - implement default/toggle default method
     //          -perhaps switch argument depending on button?
     //      - hide pick button while editing text????
@@ -46,6 +55,23 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
         self.unsubscribeFromKeyboardNotifications() //remove keyboard notification subscriptions from other views
     }
     
+    func setDefaultParams() {   //various params that change depending on user activity, method allows user to restore defaults
+        //empty meme object and empty UIImageView
+        self.memeImage = MemeImage()        //already set empty by class declaration, added here so user an restore defaults later
+        self.imageView.image = UIImage()    //blank image
+        
+        //default text, hidden prior to image selection
+        self.topTextField.text = "TOP"
+        self.topTextField.hidden = true
+        self.bottomTextField.text = "BOTTOM"
+        self.bottomTextField.hidden = true
+        
+        //original button settings, camera button initial view set if present or not
+        self.pickButton.enabled = true
+        self.saveMemeImageButton.enabled = false
+        self.cancelButton.enabled = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -54,15 +80,7 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
         self.topTextField.delegate = self.topTextFieldDelegate
         self.bottomTextField.delegate = self.bottomTextFieldDelegate
         
-        //set textField attributes (font, size, etc)
-        let memeTextAttributes = [
-            NSStrokeColorAttributeName : UIColor.blackColor(),
-            NSForegroundColorAttributeName : UIColor.whiteColor(),
-            NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-            NSStrokeWidthAttributeName : 3.0
-        ]
-        
-        //assign attributes to textFields
+        //assign attributes to textFields, set background color to translucent
         self.topTextField.defaultTextAttributes = memeTextAttributes
         self.bottomTextField.defaultTextAttributes = memeTextAttributes
         
@@ -79,59 +97,40 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
         self.topTextField.textAlignment = NSTextAlignment.Center
         self.bottomTextField.textAlignment = NSTextAlignment.Center
         
-        //Set default text
-        //TODO - Implement in delegate class later
-        self.topTextField.text = "TOP"
-        self.bottomTextField.text = "BOTTOM"
-
-        
-        //hide textFields from view until image is picked
-        if self.imageView.image == nil {
-            self.topTextField.hidden = true
-            self.bottomTextField.hidden = true
-            self.saveMemeImageButton.enabled = false
-            self.cancelButton.enabled = false
-        } else {    //reveal textfields and save button if image is selected THIS IS BACKUP, DOES NOT WORK, CAN BE DELETED
-            self.topTextField.hidden = false
-            self.bottomTextField.hidden = false
-            self.saveMemeImageButton.enabled = true
-            self.cancelButton.enabled = false
-        }
+        //set default params, see method above
+        self.setDefaultParams()
     }
     
-    @IBAction func saveMemeImage(sender: UIBarButtonItem) {
+    @IBAction func saveMemeImage(sender: UIBarButtonItem) { //creates memeImage object, segues to MemeDetailViewController
         self.memeImage = MemeImage(userTopText: self.topTextField.text, userBottomText: self.bottomTextField.text, userImage: self.imageView.image!, memedImage: self.generateMemedImage())
-        self.performSegueWithIdentifier("memeImageView", sender: self)
+        self.performSegueWithIdentifier("memeDetail", sender: self)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "memeImageView" {
-            let debugVC: DebugViewController = segue.destinationViewController as! DebugViewController
-            let data = self.memeImage
-            debugVC.testMemeImage = data
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {   //loads memeImage into next view, then segues
+        if segue.identifier == "memeDetail" {
+            let memeDetailVC: MemeDetailViewController = segue.destinationViewController as! MemeDetailViewController
+            memeDetailVC.loadedMeme = self.memeImage
         }
     }
     
-    func generateMemedImage() -> UIImage {
-        
-        // TODO: Hide toolbar and navbar
-        self.navigationController?.navigationBarHidden = true
+    func generateMemedImage() -> UIImage {  //creates new memeImage from view
+        //remove toolbar and navbar
+        self.navigationController?.navigationBar.hidden = true
         self.toolbar.hidden = true
         
         //finish editing both textFields
         self.topTextField.resignFirstResponder()
         self.bottomTextField.resignFirstResponder()
         
-        // Render view to an image
+        //Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
         self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
         let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        // TODO:  Show toolbar and navbar
-        self.navigationController?.navigationBarHidden = false
+        //restore toolbar and navbar
+        self.navigationController?.navigationBar.hidden = false
         self.toolbar.hidden = false
-        
         
         return memedImage
     }
@@ -194,17 +193,8 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     @IBAction func cancelMeme(sender: UIBarButtonItem) {
-        self.memeImage = MemeImage()        //clears out memeImage content
-        self.imageView.image = UIImage()    //blank image
-        //restores default text
-        self.topTextField.text = "TOP"
-        self.topTextField.hidden = true
-        self.bottomTextField.text = "BOTTOM"
-        self.bottomTextField.hidden = true
-        //returns buttons back to original settings
-        self.pickButton.enabled = true
-        self.saveMemeImageButton.enabled = false
-        self.cancelButton.enabled = false
+        self.setDefaultParams()     //returns default params
+        self.view.endEditing(true)  //removes keyboard from view
     }
     
     
