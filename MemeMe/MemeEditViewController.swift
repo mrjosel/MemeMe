@@ -39,15 +39,9 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         NSStrokeWidthAttributeName : 3.0
     ]
     
-    //sharingActivities for sharing the meme, used when calling shareMeme method
-    let sharingActivities : [AnyObject] = [UIActivityTypeMessage, UIActivityTypeMail,
-                                UIActivityTypePostToTwitter, UIActivityTypePostToFacebook,
-                                UIActivityTypePostToFlickr, UIActivityTypeSaveToCameraRoll,
-                                UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact,
-                                UIActivityTypePrint]
-    
     //TODO
-    //      - save/share functions
+    //      - finish save/share functions
+    //      - start/begin history table views
     //      - center pick/camera buttons, add icons instead of text
     //      - implement default/toggle default method
     //          -perhaps switch argument depending on button?
@@ -114,15 +108,17 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         self.setDefaultParams()
     }
     
-    @IBAction func shareMeme(sender: UIButton) {
+    @IBAction func shareMeme(sender: UIButton) {    //saves new memeImage and presents sharing activities to user
+        //create meme object from view
         self.memeImage = MemeImage(userTopText: self.topTextField.text, userBottomText: self.bottomTextField.text, userImage: self.imageView.image!, memedImage: self.generateMemedImage())
+        //create instance of UIActivityViewController, exclude various sharing activities
         let activityVC : UIActivityViewController = UIActivityViewController(activityItems: [self.memeImage.memedImage], applicationActivities: nil)  //need to fix applicationActivities
         activityVC.excludedActivityTypes = [UIActivityTypePostToVimeo, UIActivityTypePostToWeibo,
                                             UIActivityTypePostToTencentWeibo, UIActivityTypeAddToReadingList,
                                             UIActivityTypeAirDrop, UIActivityTypeAssignToContact]
-        
+        //present view controller
         self.presentViewController(activityVC, animated: true, completion: nil)
-        //what to do after passing memeObhect to activityVC?
+        //TODO - Need to implement closing activity method
         
     }
     
