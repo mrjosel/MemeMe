@@ -33,11 +33,6 @@
                                             <action selector="useCamera:" destination="vXZ-lx-hvc" id="CaE-hG-sJm"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Save" id="m7e-jF-ZbI">
-                                        <connections>
-                                            <action selector="saveMemeImage:" destination="vXZ-lx-hvc" id="kIc-XF-w78"/>
-                                        </connections>
-                                    </barButtonItem>
                                     <barButtonItem title="Cancel" id="xuf-bJ-xuz">
                                         <connections>
                                             <action selector="cancelMeme:" destination="vXZ-lx-hvc" id="m9t-EP-1uL"/>
@@ -157,7 +152,6 @@
                         <outlet property="cancelButton" destination="xuf-bJ-xuz" id="VcM-fS-KNZ"/>
                         <outlet property="imageView" destination="8qe-7G-nyE" id="1ch-3m-9WX"/>
                         <outlet property="pickButton" destination="Qgo-Ph-79d" id="uK3-nn-m19"/>
-                        <outlet property="saveMemeImageButton" destination="m7e-jF-ZbI" id="qqg-u8-rtE"/>
                         <outlet property="shareButton" destination="AtZ-2m-jhg" id="O29-7n-E1U"/>
                         <outlet property="toolbar" destination="Cah-CV-4jo" id="Rrr-5N-XKC"/>
                         <outlet property="topTextField" destination="Sj0-Xh-Nfd" id="zuS-uQ-IZU"/>
@@ -219,7 +213,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DEE-3o-8uF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1348.5" y="483"/>
+            <point key="canvasLocation" x="1104" y="265"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MST-f7-2Yb">

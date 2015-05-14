@@ -13,7 +13,6 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     //Outlets
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var pickButton: UIBarButtonItem!
-    @IBOutlet weak var saveMemeImageButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -74,7 +73,6 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         
         //original button settings, camera button initial view set if present or not
         self.pickButton.enabled = true
-        self.saveMemeImageButton.enabled = false
         self.cancelButton.enabled = false
         self.shareButton.hidden = true
     }
@@ -111,6 +109,12 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBAction func shareMeme(sender: UIButton) {    //saves new memeImage and presents sharing activities to user
         //create meme object from view
         self.memeImage = MemeImage(userTopText: self.topTextField.text, userBottomText: self.bottomTextField.text, userImage: self.imageView.image!, memedImage: self.generateMemedImage())
+        
+        //share MemeImages across all ViewControllers
+        let object = UIApplication.sharedApplication().delegate
+        let appDelegate = object as! AppDelegate
+        appDelegate.memes.append(self.memeImage)
+        
         //create instance of UIActivityViewController, exclude various sharing activities
         let activityVC : UIActivityViewController = UIActivityViewController(activityItems: [self.memeImage.memedImage], applicationActivities: nil)  //need to fix applicationActivities
         activityVC.excludedActivityTypes = [UIActivityTypePostToVimeo, UIActivityTypePostToWeibo,
@@ -119,21 +123,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         //present view controller
         self.presentViewController(activityVC, animated: true, completion: nil)
         //TODO - Need to implement closing activity method
-        
     }
-    
-    
-//    @IBAction func saveMemeImage(sender: UIBarButtonItem) { //creates memeImage object, segues to MemeDetailViewController
-//        self.memeImage = MemeImage(userTopText: self.topTextField.text, userBottomText: self.bottomTextField.text, userImage: self.imageView.image!, memedImage: self.generateMemedImage())
-//        self.performSegueWithIdentifier("memeDetail", sender: self)
-//    }
-    
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {   //loads memeImage into next view, then segues
-//        if segue.identifier == "memeDetail" {
-//            let memeDetailVC: MemeDetailViewController = segue.destinationViewController as! MemeDetailViewController
-//            memeDetailVC.loadedMeme = self.memeImage
-//        }
-//    }
     
     func generateMemedImage() -> UIImage {  //creates new memeImage from view
         //remove keyboard if still visible
@@ -207,9 +197,8 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         self.topTextField.hidden = false
         self.bottomTextField.hidden = false
         self.shareButton.hidden = false
-        //enables saveMemeImageButton, disable pickButton unless canceled is selected
-        self.saveMemeImageButton.enabled = true
-        self.pickButton.enabled = false
+        
+        //enables saveMemeImageButton
         self.cancelButton.enabled = true
     }
     
