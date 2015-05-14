@@ -19,6 +19,9 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
+    @IBOutlet weak var shareButton: UIButton!
+    
+    
     
     //testField delegates
     let topTextFieldDelegate = MemeTextDelegate()
@@ -34,15 +37,17 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         NSBackgroundColorAttributeName : UIColor.clearColor(),
         NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
         NSStrokeWidthAttributeName : 3.0
-        
     ]
     
     //TODO
+    //      - save/share functions
+    //      - center pick/camera buttons, add icons instead of text
     //      - implement default/toggle default method
     //          -perhaps switch argument depending on button?
     //      - hide pick button while editing text????
-    //      - center pick/camera buttons, add icons instead of text
-    //      - save/share functions
+    //      - CODE CLEANUP
+
+
     
     override func viewWillAppear(animated: Bool) {
         //limits camera button in simulator, only allows on HW where camera is suported
@@ -101,10 +106,18 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         self.setDefaultParams()
     }
     
-    @IBAction func saveMemeImage(sender: UIBarButtonItem) { //creates memeImage object, segues to MemeDetailViewController
+    @IBAction func shareMeme(sender: UIButton) {
         self.memeImage = MemeImage(userTopText: self.topTextField.text, userBottomText: self.bottomTextField.text, userImage: self.imageView.image!, memedImage: self.generateMemedImage())
-        self.performSegueWithIdentifier("memeDetail", sender: self)
+        let activityVC = UIActivityViewController(activityItems: [self.memeImage], applicationActivities: nil) as UIActivityViewController  //need to fix applicationActivities
+        self.navigationController?.presentViewController(activityVC, animated: true, completion: nil)
+        //what to do after passing memeObhect to activityVC?
     }
+    
+    
+//    @IBAction func saveMemeImage(sender: UIBarButtonItem) { //creates memeImage object, segues to MemeDetailViewController
+//        self.memeImage = MemeImage(userTopText: self.topTextField.text, userBottomText: self.bottomTextField.text, userImage: self.imageView.image!, memedImage: self.generateMemedImage())
+//        self.performSegueWithIdentifier("memeDetail", sender: self)
+//    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {   //loads memeImage into next view, then segues
         if segue.identifier == "memeDetail" {
@@ -114,6 +127,9 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func generateMemedImage() -> UIImage {  //creates new memeImage from view
+        //remove keyboard if still visible
+        self.view.endEditing(true)
+        
         //remove toolbar and navbar
         self.navigationController?.navigationBar.hidden = true
         self.toolbar.hidden = true

@@ -20,9 +20,9 @@ extension MemeImage: Printable {
     }
 
 
-struct MemeImage {
-    //struct for an image that is Meme'ed
-    //Struct has optional top and bottom UITextField from user input that are used in conjunction with UIImge to render new image with UITextFields superimposed on UIImage.  Method exists in MemeMeViewController
+class MemeImage: AnyObject {
+    //class for an image that is Meme'ed
+    //class has optional top and bottom UITextField from user input that are used in conjunction with UIImge to render new image with UITextFields superimposed on UIImage.  Method exists in MemeMeViewController
     
     //all variables of MemeImage struct
     //Top and bottom strings, one or more could be optional
