@@ -39,6 +39,13 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         NSStrokeWidthAttributeName : 3.0
     ]
     
+    //sharingActivities for sharing the meme, used when calling shareMeme method
+    let sharingActivities : [AnyObject] = [UIActivityTypeMessage, UIActivityTypeMail,
+                                UIActivityTypePostToTwitter, UIActivityTypePostToFacebook,
+                                UIActivityTypePostToFlickr, UIActivityTypeSaveToCameraRoll,
+                                UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact,
+                                UIActivityTypePrint]
+    
     //TODO
     //      - save/share functions
     //      - center pick/camera buttons, add icons instead of text
@@ -75,6 +82,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         self.pickButton.enabled = true
         self.saveMemeImageButton.enabled = false
         self.cancelButton.enabled = false
+        self.shareButton.hidden = true
     }
     
     override func viewDidLoad() {
@@ -108,9 +116,14 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     
     @IBAction func shareMeme(sender: UIButton) {
         self.memeImage = MemeImage(userTopText: self.topTextField.text, userBottomText: self.bottomTextField.text, userImage: self.imageView.image!, memedImage: self.generateMemedImage())
-        let activityVC = UIActivityViewController(activityItems: [self.memeImage], applicationActivities: nil) as UIActivityViewController  //need to fix applicationActivities
-        self.navigationController?.presentViewController(activityVC, animated: true, completion: nil)
+        let activityVC : UIActivityViewController = UIActivityViewController(activityItems: [self.memeImage.memedImage], applicationActivities: nil)  //need to fix applicationActivities
+        activityVC.excludedActivityTypes = [UIActivityTypePostToVimeo, UIActivityTypePostToWeibo,
+                                            UIActivityTypePostToTencentWeibo, UIActivityTypeAddToReadingList,
+                                            UIActivityTypeAirDrop, UIActivityTypeAssignToContact]
+        
+        self.presentViewController(activityVC, animated: true, completion: nil)
         //what to do after passing memeObhect to activityVC?
+        
     }
     
     
@@ -119,12 +132,12 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
 //        self.performSegueWithIdentifier("memeDetail", sender: self)
 //    }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {   //loads memeImage into next view, then segues
-        if segue.identifier == "memeDetail" {
-            let memeDetailVC: MemeDetailViewController = segue.destinationViewController as! MemeDetailViewController
-            memeDetailVC.loadedMeme = self.memeImage
-        }
-    }
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {   //loads memeImage into next view, then segues
+//        if segue.identifier == "memeDetail" {
+//            let memeDetailVC: MemeDetailViewController = segue.destinationViewController as! MemeDetailViewController
+//            memeDetailVC.loadedMeme = self.memeImage
+//        }
+//    }
     
     func generateMemedImage() -> UIImage {  //creates new memeImage from view
         //remove keyboard if still visible
@@ -194,9 +207,10 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
             self.imageView.contentMode = UIViewContentMode.ScaleAspectFit
         }
         self.dismissViewControllerAnimated(true, completion: nil)   //dismisses pickerController
-        //reveals textFields for editing
+        //reveals textFields and shareButton for editing
         self.topTextField.hidden = false
         self.bottomTextField.hidden = false
+        self.shareButton.hidden = false
         //enables saveMemeImageButton, disable pickButton unless canceled is selected
         self.saveMemeImageButton.enabled = true
         self.pickButton.enabled = false
