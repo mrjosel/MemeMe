@@ -128,7 +128,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
                 let sentMemesTableVC : SentMemesTableViewController = SentMemesTableViewController()
                 
                 self.dismissViewControllerAnimated(true, completion: nil)
-                self.navigationController?.presentViewController(sentMemesTableVC, animated: false, completion: nil)
+                //self.navigationController?.presentViewController(sentMemesTableVC, animated: false, completion: nil)
             }
         }
         //present view controller
@@ -223,7 +223,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         
         //transitions to SentMemesTableViewController as per criteria
         let sentMemesVC : SentMemesTableViewController = SentMemesTableViewController()
-        self.navigationController?.presentViewController(sentMemesVC, animated: true, completion: nil)
+        //self.navigationController?.presentViewController(sentMemesVC, animated: true, completion: nil)
     }
     
     

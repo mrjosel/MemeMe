@@ -6,68 +6,6 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Sent Memes Table View Controller-->
-        <scene sceneID="XuC-Yx-NtX">
-            <objects>
-                <viewController id="eN1-d5-9id" customClass="SentMemesTableViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="dFW-Ht-HL2"/>
-                        <viewControllerLayoutGuide type="bottom" id="E4U-iF-6eW"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Z2z-1i-qJo">
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fZ5-ul-fTY">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MemeCell" id="b3G-r4-Enn">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b3G-r4-Enn" id="ngl-wm-4B5">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="E4U-iF-6eW" firstAttribute="top" secondItem="fZ5-ul-fTY" secondAttribute="bottom" id="B5O-ro-nFe"/>
-                            <constraint firstAttribute="trailing" secondItem="fZ5-ul-fTY" secondAttribute="trailing" id="Ga6-ze-nDy"/>
-                            <constraint firstItem="fZ5-ul-fTY" firstAttribute="leading" secondItem="Z2z-1i-qJo" secondAttribute="leading" id="RFL-m9-b1m"/>
-                            <constraint firstItem="fZ5-ul-fTY" firstAttribute="top" secondItem="Z2z-1i-qJo" secondAttribute="topMargin" id="TPb-nw-Wtj"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="fZ5-ul-fTY"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="Ga6-ze-nDy"/>
-                                <exclude reference="RFL-m9-b1m"/>
-                                <exclude reference="TPb-nw-Wtj"/>
-                                <exclude reference="B5O-ro-nFe"/>
-                            </mask>
-                        </variation>
-                        <variation key="widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="fZ5-ul-fTY"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="Ga6-ze-nDy"/>
-                                <include reference="RFL-m9-b1m"/>
-                                <include reference="TPb-nw-Wtj"/>
-                                <include reference="B5O-ro-nFe"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <connections>
-                        <outlet property="sentMemesTable" destination="fZ5-ul-fTY" id="QFD-J1-0R2"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="a6L-bY-Fvk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="400.5" y="-459"/>
-        </scene>
         <!--Meme Edit View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
@@ -218,7 +156,6 @@
                         <outlet property="shareButton" destination="AtZ-2m-jhg" id="O29-7n-E1U"/>
                         <outlet property="toolbar" destination="Cah-CV-4jo" id="Rrr-5N-XKC"/>
                         <outlet property="topTextField" destination="Sj0-Xh-Nfd" id="zuS-uQ-IZU"/>
-                        <segue destination="KnE-g1-b2b" kind="show" identifier="memeDetail" id="eCm-n4-cH9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -277,25 +214,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DEE-3o-8uF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1104" y="265"/>
-        </scene>
-        <!--Sent Memes Collection View Controller-->
-        <scene sceneID="fgm-iG-VZN">
-            <objects>
-                <viewController id="mhf-Wh-qIe" customClass="SentMemesCollectionViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="UZ3-ne-bPE"/>
-                        <viewControllerLayoutGuide type="bottom" id="2Ov-jM-2ng"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="g2u-q7-ja8">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eAb-ZD-EVb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="393" y="1059"/>
+            <point key="canvasLocation" x="1908" y="-55"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MST-f7-2Yb">

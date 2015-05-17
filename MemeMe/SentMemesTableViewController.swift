@@ -9,15 +9,13 @@
 import UIKit
 
 class SentMemesTableViewController: UIViewController, UITableViewDataSource {
-
-    @IBOutlet weak var sentMemesTable: UITableView!
     
     var memes : [MemeImage]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view.        
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
         self.memes = appDelegate.memes
@@ -41,7 +39,7 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController")! as! MemeDetailViewController
         detailController.loadedMeme = self.memes[indexPath.row]
-        self.navigationController!.pushViewController(detailController, animated: true)
+        self.navigationController!.performSegueWithIdentifier("memeDetail", sender: self)
 
     }
 
