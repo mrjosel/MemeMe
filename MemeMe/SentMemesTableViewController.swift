@@ -8,12 +8,41 @@
 
 import UIKit
 
-class SentMemesTableViewController: UIViewController {
+class SentMemesTableViewController: UIViewController, UITableViewDataSource {
 
+    @IBOutlet weak var sentMemesTable: UITableView!
+    
+    var memes : [MemeImage]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let object = UIApplication.sharedApplication().delegate
+        let appDelegate = object as! AppDelegate
+        self.memes = appDelegate.memes
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("MemeCell") as! UITableViewCell
+        let meme = self.memes[indexPath.row]
+        
+        // Set the name and image
+        cell.textLabel?.text = meme.topText
+        cell.imageView?.image = meme.memedImage
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return memes.count
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController")! as! MemeDetailViewController
+        detailController.loadedMeme = self.memes[indexPath.row]
+        self.navigationController!.pushViewController(detailController, animated: true)
+
     }
 
     override func didReceiveMemoryWarning() {

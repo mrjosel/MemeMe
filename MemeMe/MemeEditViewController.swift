@@ -114,15 +114,25 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
         appDelegate.memes.append(self.memeImage)
-        
+
         //create instance of UIActivityViewController, exclude various sharing activities
         let activityVC : UIActivityViewController = UIActivityViewController(activityItems: [self.memeImage.memedImage], applicationActivities: nil)  //need to fix applicationActivities
         activityVC.excludedActivityTypes = [UIActivityTypePostToVimeo, UIActivityTypePostToWeibo,
                                             UIActivityTypePostToTencentWeibo, UIActivityTypeAddToReadingList,
                                             UIActivityTypeAirDrop, UIActivityTypeAssignToContact]
+        
+        //dismisses activityVC and shows SentMemesTableViewController upon activity finish
+        activityVC.completionWithItemsHandler = {activity, completed, items, error in
+            if completed {
+                
+                let sentMemesTableVC : SentMemesTableViewController = SentMemesTableViewController()
+                
+                self.dismissViewControllerAnimated(true, completion: nil)
+                self.navigationController?.presentViewController(sentMemesTableVC, animated: false, completion: nil)
+            }
+        }
         //present view controller
         self.presentViewController(activityVC, animated: true, completion: nil)
-        //TODO - Need to implement closing activity method
     }
     
     func generateMemedImage() -> UIImage {  //creates new memeImage from view
@@ -150,7 +160,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         return memedImage
     }
     
-    //-----Following methods all related to resizing view when keyboard appeara/dissappers
+    //-----Following methods all related to resizing view when keyboard appeara/dissappers-------------------------
     func subscribeToKeyboardNotifications() {
         //Keyboard show/hide notifications - func called in viewWillAppear
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
@@ -183,7 +193,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
         return keyboardSize.CGRectValue().height
     }
-    //-----End of view resizing methods
+    //------------------------------End of view resizing methods--------------------------------------------------
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         //presents chosen image to view, reveals textFeilds for editing
@@ -210,6 +220,10 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBAction func cancelMeme(sender: UIBarButtonItem) {
         self.setDefaultParams()     //returns default params
         self.view.endEditing(true)  //removes keyboard from view
+        
+        //transitions to SentMemesTableViewController as per criteria
+        let sentMemesVC : SentMemesTableViewController = SentMemesTableViewController()
+        self.navigationController?.presentViewController(sentMemesVC, animated: true, completion: nil)
     }
     
     
