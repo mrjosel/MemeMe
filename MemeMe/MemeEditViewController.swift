@@ -18,7 +18,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
-    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
     
     
     
@@ -74,7 +74,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         //original button settings, camera button initial view set if present or not
         self.pickButton.enabled = true
         self.cancelButton.enabled = false
-        self.shareButton.hidden = true
+        self.shareButton.enabled = false
     }
     
     override func viewDidLoad() {
@@ -106,7 +106,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         self.setDefaultParams()
     }
     
-    @IBAction func shareMeme(sender: UIButton) {    //saves new memeImage and presents sharing activities to user
+    @IBAction func shareMeme(sender: UIBarButtonItem) {    //saves new memeImage and presents sharing activities to user
         //create meme object from view
         self.memeImage = MemeImage(userTopText: self.topTextField.text, userBottomText: self.bottomTextField.text, userImage: self.imageView.image!, memedImage: self.generateMemedImage())
         
@@ -124,11 +124,10 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         //dismisses activityVC and shows SentMemesTableViewController upon activity finish
         activityVC.completionWithItemsHandler = {activity, completed, items, error in
             if completed {
-                
-                let sentMemesTableVC : SentMemesTableViewController = SentMemesTableViewController()
+                let sentMemesVC
                 
                 self.dismissViewControllerAnimated(true, completion: nil)
-                //self.navigationController?.presentViewController(sentMemesTableVC, animated: false, completion: nil)
+                
             }
         }
         //present view controller
@@ -206,7 +205,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         //reveals textFields and shareButton for editing
         self.topTextField.hidden = false
         self.bottomTextField.hidden = false
-        self.shareButton.hidden = false
+        self.shareButton.enabled = true
         
         //enables saveMemeImageButton
         self.cancelButton.enabled = true

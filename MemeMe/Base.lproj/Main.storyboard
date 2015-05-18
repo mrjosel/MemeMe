@@ -34,11 +34,6 @@
                                             <action selector="useCamera:" destination="vXZ-lx-hvc" id="CaE-hG-sJm"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Cancel" id="xuf-bJ-xuz">
-                                        <connections>
-                                            <action selector="cancelMeme:" destination="vXZ-lx-hvc" id="m9t-EP-1uL"/>
-                                        </connections>
-                                    </barButtonItem>
                                 </items>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -134,33 +129,86 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="0dY-Oe-wVr">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="jrR-dE-neZ">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="AtZ-2m-jhg">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Share">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="shareMeme:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="rAU-PW-p1g"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="leftBarButtonItem" title="Share" id="qyr-fD-s37">
+                            <connections>
+                                <action selector="shareMeme:" destination="vXZ-lx-hvc" id="giq-cT-c07"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="sRL-U1-6fl">
+                            <connections>
+                                <action selector="cancelMeme:" destination="vXZ-lx-hvc" id="7Ib-O6-jIx"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="bottomTextField" destination="8ui-9w-4z9" id="YdY-EQ-EmW"/>
                         <outlet property="cameraButton" destination="qMj-Sh-4Kz" id="c0y-cX-xYt"/>
-                        <outlet property="cancelButton" destination="xuf-bJ-xuz" id="VcM-fS-KNZ"/>
+                        <outlet property="cancelButton" destination="sRL-U1-6fl" id="1Ne-q2-EFm"/>
                         <outlet property="imageView" destination="8qe-7G-nyE" id="1ch-3m-9WX"/>
                         <outlet property="pickButton" destination="Qgo-Ph-79d" id="uK3-nn-m19"/>
-                        <outlet property="shareButton" destination="AtZ-2m-jhg" id="O29-7n-E1U"/>
+                        <outlet property="shareButton" destination="qyr-fD-s37" id="xvG-I8-VRn"/>
                         <outlet property="toolbar" destination="Cah-CV-4jo" id="Rrr-5N-XKC"/>
                         <outlet property="topTextField" destination="Sj0-Xh-Nfd" id="zuS-uQ-IZU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="394" y="265"/>
+            <point key="canvasLocation" x="205.5" y="265"/>
+        </scene>
+        <!--Item 2-->
+        <scene sceneID="gFh-3j-guO">
+            <objects>
+                <viewController id="plA-km-hXv" customClass="SentMemesCollectionViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SYS-h5-j0F"/>
+                        <viewControllerLayoutGuide type="bottom" id="vf7-Bk-L6R"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Tfk-oU-3Vg">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="ZI8-Pd-sed"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="maf-If-aqp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1135.5" y="-87"/>
+        </scene>
+        <!--Item 1-->
+        <scene sceneID="DK8-iE-XBr">
+            <objects>
+                <viewController id="trf-wA-fAg" customClass="SentMemesTableViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ndP-R7-Ke8"/>
+                        <viewControllerLayoutGuide type="bottom" id="eMW-fM-EnP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Nvj-Kh-Nse">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 1" id="QOo-Be-nUy"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gMV-c1-cAG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1135.5" y="-749"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="MBj-Em-yrY">
+            <objects>
+                <tabBarController id="hnj-Zy-rtq" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="jZc-Gb-2g9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="trf-wA-fAg" kind="relationship" relationship="viewControllers" id="TPE-GH-5EG"/>
+                        <segue destination="plA-km-hXv" kind="relationship" relationship="viewControllers" id="huA-x0-jDq"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UuS-k6-pJ7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="205.5" y="-417"/>
         </scene>
         <!--Meme Detail View Controller-->
         <scene sceneID="tqO-tq-4hN">
@@ -230,7 +278,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WB4-zz-t5C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-364" y="265"/>
+            <point key="canvasLocation" x="-901.5" y="265"/>
         </scene>
     </scenes>
 </document>
