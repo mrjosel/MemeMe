@@ -10,6 +10,7 @@ import UIKit
 
 class SentMemesTableViewController: UIViewController, UITableViewDataSource {
     
+    @IBOutlet weak var addMemeButton: UIBarButtonItem!
     var memes : [MemeImage]!
     
     override func viewDidLoad() {
@@ -20,6 +21,13 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource {
         let appDelegate = object as! AppDelegate
         self.memes = appDelegate.memes
     }
+    
+    @IBAction func returnToMemeEditor(sender: UIBarButtonItem) {
+        let memeEditVC : MemeEditViewController = MemeEditViewController()
+        self.navigationController?.presentViewController(memeEditVC, animated: false, completion: nil)
+        
+    }
+    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("memeCell") as! UITableViewCell
