@@ -22,7 +22,7 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MemeCell") as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("memeCell") as! UITableViewCell
         let meme = self.memes[indexPath.row]
         
         // Set the name and image
@@ -37,9 +37,9 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController")! as! MemeDetailViewController
-        detailController.loadedMeme = self.memes[indexPath.row]
-        self.navigationController!.performSegueWithIdentifier("memeDetail", sender: self)
+//        let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController")! as! MemeDetailViewController
+//        detailController.loadedMeme = self.memes[indexPath.row]
+//        self.navigationController!.performSegueWithIdentifier("memeDetail", sender: self)
 
     }
 

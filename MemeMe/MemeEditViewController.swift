@@ -124,9 +124,10 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         //dismisses activityVC and shows SentMemesTableViewController upon activity finish
         activityVC.completionWithItemsHandler = {activity, completed, items, error in
             if completed {
-                let sentMemesVC
-                
+                var sentMemesVC : UITabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("sentMemesTabVC") as! UITabBarController
                 self.dismissViewControllerAnimated(true, completion: nil)
+                self.presentViewController(sentMemesVC, animated: true, completion: nil)
+
                 
             }
         }
@@ -221,8 +222,8 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         self.view.endEditing(true)  //removes keyboard from view
         
         //transitions to SentMemesTableViewController as per criteria
-        let sentMemesVC : SentMemesTableViewController = SentMemesTableViewController()
-        //self.navigationController?.presentViewController(sentMemesVC, animated: true, completion: nil)
+        var sentMemesVC : UITabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("sentMemesTabVC") as! UITabBarController
+        self.presentViewController(sentMemesVC, animated: false, completion: nil)
     }
     
     
