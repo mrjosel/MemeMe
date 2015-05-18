@@ -10,15 +10,16 @@ import UIKit
 
 class MemeDetailViewController: UIViewController {
     
-    @IBOutlet weak var debugImageView: UIImageView!
+    @IBOutlet weak var savedMemeImageView: UIImageView!
     var loadedMeme: MemeImage!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
-        self.debugImageView.image = loadedMeme.memedImage
-        println(self.loadedMeme)
+        self.tabBarController?.tabBarItem.enabled = false
+//        self.tabBarItem.enabled = false
+//        tabBarController?.tabBarItem.enabled = false
+        self.savedMemeImageView.image = self.loadedMeme.memedImage
     }
 
     override func didReceiveMemoryWarning() {

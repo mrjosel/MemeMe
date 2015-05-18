@@ -73,7 +73,6 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         
         //original button settings, camera button initial view set if present or not
         self.pickButton.enabled = true
-        self.cancelButton.enabled = false
         self.shareButton.enabled = false
     }
     
@@ -81,18 +80,20 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        //set default params, see method above
+        self.setDefaultParams()
         //Set Delegates
         self.topTextField.delegate = self.topTextFieldDelegate
         self.bottomTextField.delegate = self.bottomTextFieldDelegate
-        
+
         //assign attributes to textFields, set background color to translucent
         self.topTextField.defaultTextAttributes = memeTextAttributes
         self.bottomTextField.defaultTextAttributes = memeTextAttributes
-        
+
         //Set individual fields delegate properties for TOP and BOTTOM
         self.topTextFieldDelegate.position = .Top
         self.bottomTextFieldDelegate.position = .Bottom
-        
+
         //Make Clear buttons hidden unless delegate displays them
         //REMOVED FOR NOW, MAY IMPLEMENT IN FINAL VERSION
         //        topTextField.clearButtonMode = UITextFieldViewMode.WhileEditing
@@ -101,9 +102,6 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         //Set Text Allignment
         self.topTextField.textAlignment = NSTextAlignment.Center
         self.bottomTextField.textAlignment = NSTextAlignment.Center
-        
-        //set default params, see method above
-        self.setDefaultParams()
     }
     
     @IBAction func shareMeme(sender: UIBarButtonItem) {    //saves new memeImage and presents sharing activities to user
@@ -124,11 +122,10 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         //dismisses activityVC and shows SentMemesTableViewController upon activity finish
         activityVC.completionWithItemsHandler = {activity, completed, items, error in
             if completed {
-                var sentMemesVC : UITabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("sentMemesTabVC") as! UITabBarController
+                var sentMemesVC : UITabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("SentMemesTabVC") as! UITabBarController
                 self.dismissViewControllerAnimated(true, completion: nil)
+                self.setDefaultParams() //make defaults for when returning from sentMemesVC
                 self.presentViewController(sentMemesVC, animated: true, completion: nil)
-
-                
             }
         }
         //present view controller
@@ -207,9 +204,6 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         self.topTextField.hidden = false
         self.bottomTextField.hidden = false
         self.shareButton.enabled = true
-        
-        //enables saveMemeImageButton
-        self.cancelButton.enabled = true
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {

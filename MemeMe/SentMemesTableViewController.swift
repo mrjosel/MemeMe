@@ -23,9 +23,8 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource {
     }
     
     @IBAction func returnToMemeEditor(sender: UIBarButtonItem) {
-        let memeEditVC : MemeEditViewController = MemeEditViewController()
-        self.navigationController?.presentViewController(memeEditVC, animated: false, completion: nil)
-        
+        //dissmiss VC and return to MemeEditVC
+        self.dismissViewControllerAnimated(false, completion: nil)
     }
     
     
@@ -34,7 +33,7 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource {
         let meme = self.memes[indexPath.row]
         
         // Set the name and image
-        cell.textLabel?.text = meme.topText
+        cell.textLabel?.text = meme.topText + " " + meme.bottomText
         cell.imageView?.image = meme.memedImage
         
         return cell
@@ -45,10 +44,9 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController")! as! MemeDetailViewController
-//        detailController.loadedMeme = self.memes[indexPath.row]
-//        self.navigationController!.performSegueWithIdentifier("memeDetail", sender: self)
-
+        var detailController = self.storyboard?.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
+        detailController.loadedMeme = self.memes[indexPath.row]
+        self.navigationController?.pushViewController(detailController, animated: true)
     }
 
     override func didReceiveMemoryWarning() {
