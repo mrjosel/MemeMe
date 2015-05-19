@@ -11,42 +11,41 @@ import UIKit
 class SentMemesTableViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var addMemeButton: UIBarButtonItem!
-    var memes : [MemeImage] = []
+    var memes : [MemeImage]!
     
     override func viewWillAppear(animated: Bool) {
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
         self.memes = appDelegate.memes
-//        println(self.memes.count)
-//        println(self.memes)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        //present Meme Editor if no memes in array
+        if self.memes.count == 0 {
+            var editVC = self.storyboard?.instantiateViewControllerWithIdentifier("MemeEditViewController") as! MemeEditViewController
+            self.navigationController?.presentViewController(editVC, animated: true, completion: nil)
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.        
-//        let object = UIApplication.sharedApplication().delegate
-//        let appDelegate = object as! AppDelegate
-//        self.memes = appDelegate.memes
-//        println(memes)
-//        println(memes.count)
-        
-        //load memes array
-//        let object = UIApplication.sharedApplication().delegate
-//        let appDelegate = object as! AppDelegate
-//        self.memes = appDelegate.memes
-        //println(self.memes.count)
+        // Do any additional setup after loading the view.
     }
     
     @IBAction func returnToMemeEditor(sender: UIBarButtonItem) {
         //dissmiss VC and return to MemeEditVC
-        //self.dismissViewControllerAnimated(false, completion: nil)
         var editVC = self.storyboard?.instantiateViewControllerWithIdentifier("MemeEditViewController") as! MemeEditViewController
         self.navigationController?.presentViewController(editVC, animated: true, completion: nil)
     }
     
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //returns size of memes array to populate table
+        return memes.count
+    }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        println("cellForRowAtIndexPath")
+
         let cell = tableView.dequeueReusableCellWithIdentifier("memeCell") as! UITableViewCell
         let meme = self.memes[indexPath.row]
         
@@ -54,12 +53,6 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource {
         cell.textLabel?.text = meme.topText + " " + meme.bottomText
         cell.imageView?.image = meme.memedImage
         return cell
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        println(memes.count)
-
-        return memes.count
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

@@ -125,8 +125,8 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         activityVC.completionWithItemsHandler = {activity, completed, items, error in
             if completed {
                 //var sentMemesVC : UITabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("SentMemesTabVC") as! UITabBarController
-                self.dismissViewControllerAnimated(true, completion: nil)
-                self.setDefaultParams() //make defaults for when returning from sentMemesVC
+                activityVC.dismissViewControllerAnimated(true, completion: nil)
+                self.setDefaultParams() //make defaults
                 //self.presentViewController(sentMemesVC, animated: true, completion: nil)
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
