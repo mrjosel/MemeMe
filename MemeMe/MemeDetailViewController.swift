@@ -10,7 +10,10 @@ import UIKit
 
 class MemeDetailViewController: UIViewController {
     
+    //outlets
     @IBOutlet weak var savedMemeImageView: UIImageView!
+    
+    //loaded meme for display and further sharing
     var loadedMeme: MemeImage!
 
     override func viewDidLoad() {
@@ -22,22 +25,12 @@ class MemeDetailViewController: UIViewController {
         
         //display memedImage
         self.savedMemeImageView.image = self.loadedMeme.memedImage
+        self.savedMemeImageView.contentMode = UIViewContentMode.ScaleAspectFit
+
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -17,6 +17,9 @@ class SentMemesTableViewController: UITableViewController, UITableViewDataSource
     var memes : [MemeImage]!
     
     override func viewWillAppear(animated: Bool) {
+        //keep tabBar in view
+        self.tabBarController?.tabBar.hidden = false
+        
         //load shared meme array each time view will appear
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
