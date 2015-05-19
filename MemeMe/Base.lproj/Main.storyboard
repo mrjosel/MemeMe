@@ -130,6 +130,16 @@
                                 <exclude reference="hvZ-8u-7nX"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="mZM-FB-t0P"/>
+                                <exclude reference="u9U-48-Zrs"/>
+                                <exclude reference="4Ot-fk-IfZ"/>
+                                <exclude reference="Gbj-Cl-dwF"/>
+                                <exclude reference="fVA-nj-ZVD"/>
+                                <exclude reference="3yp-n5-9GO"/>
+                                <exclude reference="EFY-kZ-RoC"/>
+                                <exclude reference="NER-Kq-Llm"/>
+                                <exclude reference="aZv-DS-a95"/>
+                                <exclude reference="ZQd-mS-LrQ"/>
                                 <exclude reference="0Ou-JP-dGb"/>
                                 <exclude reference="Rl5-V2-ItQ"/>
                                 <exclude reference="3zU-eo-Ymj"/>
@@ -138,16 +148,6 @@
                                 <exclude reference="dVy-s4-23b"/>
                                 <exclude reference="ekd-5b-lf9"/>
                                 <exclude reference="qdb-2o-nM7"/>
-                                <exclude reference="4Ot-fk-IfZ"/>
-                                <exclude reference="Gbj-Cl-dwF"/>
-                                <exclude reference="fVA-nj-ZVD"/>
-                                <exclude reference="mZM-FB-t0P"/>
-                                <exclude reference="u9U-48-Zrs"/>
-                                <exclude reference="3yp-n5-9GO"/>
-                                <exclude reference="EFY-kZ-RoC"/>
-                                <exclude reference="NER-Kq-Llm"/>
-                                <exclude reference="aZv-DS-a95"/>
-                                <exclude reference="ZQd-mS-LrQ"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -158,6 +158,16 @@
                                 <include reference="hvZ-8u-7nX"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="mZM-FB-t0P"/>
+                                <include reference="u9U-48-Zrs"/>
+                                <include reference="4Ot-fk-IfZ"/>
+                                <include reference="Gbj-Cl-dwF"/>
+                                <include reference="fVA-nj-ZVD"/>
+                                <include reference="3yp-n5-9GO"/>
+                                <include reference="EFY-kZ-RoC"/>
+                                <include reference="NER-Kq-Llm"/>
+                                <include reference="aZv-DS-a95"/>
+                                <include reference="ZQd-mS-LrQ"/>
                                 <include reference="0Ou-JP-dGb"/>
                                 <include reference="Rl5-V2-ItQ"/>
                                 <include reference="3zU-eo-Ymj"/>
@@ -166,16 +176,6 @@
                                 <include reference="dVy-s4-23b"/>
                                 <include reference="ekd-5b-lf9"/>
                                 <include reference="qdb-2o-nM7"/>
-                                <include reference="4Ot-fk-IfZ"/>
-                                <include reference="Gbj-Cl-dwF"/>
-                                <include reference="fVA-nj-ZVD"/>
-                                <include reference="mZM-FB-t0P"/>
-                                <include reference="u9U-48-Zrs"/>
-                                <include reference="3yp-n5-9GO"/>
-                                <include reference="EFY-kZ-RoC"/>
-                                <include reference="NER-Kq-Llm"/>
-                                <include reference="aZv-DS-a95"/>
-                                <include reference="ZQd-mS-LrQ"/>
                             </mask>
                         </variation>
                     </view>
@@ -257,7 +257,6 @@
         <!--Item-->
         <scene sceneID="14S-A6-lqQ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="B02-HK-IbF" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="atG-Vb-Pp6" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="APx-aI-rlk"/>
                     <toolbarItems/>
@@ -270,6 +269,7 @@
                         <segue destination="5CM-cb-2Gu" kind="relationship" relationship="rootViewController" id="dLn-p5-C4s"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B02-HK-IbF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4126.5" y="-823"/>
         </scene>
@@ -278,6 +278,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="SentMemesTableVC" id="5CM-cb-2Gu" customClass="SentMemesTableViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="4dJ-Uz-cbB">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -311,7 +312,6 @@
         <!--Item-->
         <scene sceneID="xCM-b5-rJk">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qgM-Rc-Pr7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Riw-XY-iQA" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="hoT-2g-8vs"/>
                     <toolbarItems/>
@@ -324,6 +324,7 @@
                         <segue destination="iyS-Dg-dSD" kind="relationship" relationship="rootViewController" id="ngH-D0-Ncq"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qgM-Rc-Pr7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4126.5" y="-161"/>
         </scene>
@@ -332,6 +333,7 @@
             <objects>
                 <collectionViewController storyboardIdentifier="SentMemesCollectionVC" id="iyS-Dg-dSD" customClass="SentMemesCollectionViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="muc-Yd-w34">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7Aa-4M-TvC">

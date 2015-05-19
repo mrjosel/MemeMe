@@ -39,17 +39,18 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     ]
     
     //TODO
-    //      - finish save/share functions
-    //      - start/begin history table views
+    //      - fix disappearing tabBars
     //      - center pick/camera buttons, add icons instead of text
-    //      - implement default/toggle default method
-    //          -perhaps switch argument depending on button?
-    //      - hide pick button while editing text????
+    //      - keep textField text same size
+    //      - non-centered textFields after rendering?
+    //      - blurry image after rendering?
+    //      - better image presentation in tableVC and MemeDetailVC
     //      - CODE CLEANUP
 
 
     
     override func viewWillAppear(animated: Bool) {
+        
         //limits camera button in simulator, only allows on HW where camera is suported
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         //subscribe to keyboard notifications to allow for resizing view when needed
@@ -98,11 +99,6 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         self.topTextFieldDelegate.position = .Top
         self.bottomTextFieldDelegate.position = .Bottom
 
-        //Make Clear buttons hidden unless delegate displays them
-        //REMOVED FOR NOW, MAY IMPLEMENT IN FINAL VERSION
-        //        topTextField.clearButtonMode = UITextFieldViewMode.WhileEditing
-        //        topTextField.clearButtonMode = UITextFieldViewMode.WhileEditing
-        
         //Set Text Allignment
         self.topTextField.textAlignment = NSTextAlignment.Center
         self.bottomTextField.textAlignment = NSTextAlignment.Center
@@ -126,10 +122,8 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         //dismisses activityVC and shows SentMemesTableViewController upon activity finish
         activityVC.completionWithItemsHandler = {activity, completed, items, error in
             if completed {
-                //var sentMemesVC : UITabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("SentMemesTabVC") as! UITabBarController
                 activityVC.dismissViewControllerAnimated(true, completion: nil)
                 self.setDefaultParams() //make defaults
-                //self.presentViewController(sentMemesVC, animated: true, completion: nil)
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
         }
@@ -221,8 +215,6 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         self.view.endEditing(true)  //removes keyboard from view
         
         //transitions to SentMemesTableViewController as per criteria
-//        var sentMemesVC : UITabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("sentMemesTabVC") as! UITabBarController
-//        self.presentViewController(sentMemesVC, animated: false, completion: nil)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     

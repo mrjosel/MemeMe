@@ -10,12 +10,14 @@ import UIKit
 
 class SentMemesCollectionViewController: UICollectionViewController, UICollectionViewDataSource {
 
+    //add meme button
     @IBOutlet weak var addMemeButton: UIBarButtonItem!
-    //array of saved memes
+    
+    //shared array of memes
     var memes : [MemeImage]!
     
     override func viewWillAppear(animated: Bool) {
-        //load memes array
+        //load shared meme array each time view will appear
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
         self.memes = appDelegate.memes
@@ -23,11 +25,18 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
     }
     
     override func viewDidAppear(animated: Bool) {
+        //present Meme Editor if no memes in array, else do nothing
+        //SHOULD NEVER ARRIVE HERE
+        //TABLE VC IS INITIAL VC
+        //THIS IS HERE FOR SAFETY
+        if self.memes.count == 0 {
+            var editVC = self.storyboard?.instantiateViewControllerWithIdentifier("MemeEditViewController") as! MemeEditViewController
+            self.navigationController?.presentViewController(editVC, animated: true, completion: nil)
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 
@@ -44,20 +53,23 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
     
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //gets size of collection
+        //returns size of memes array to populate collection
         return self.memes.count
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath:NSIndexPath) {
+        //displays meme image for viewing
         let detailController = self.storyboard?.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
         detailController.loadedMeme = self.memes[indexPath.row]
         self.navigationController?.pushViewController(detailController, animated: true)
     }
         
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        //sets cell based on meme in array
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("memeCollectionCell", forIndexPath: indexPath) as! MemeCollectionViewCell
         let meme = self.memes[indexPath.row]
         
+        //textField attributes
         let memeCellTextAttributes = [
             NSStrokeColorAttributeName : UIColor.blackColor(),
             NSForegroundColorAttributeName : UIColor.whiteColor(),
@@ -65,19 +77,23 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
             NSStrokeWidthAttributeName : -3.0
         ]
         
-        //image to display
-        cell.memeCellImageView.image = meme.origImage
-        
         //text overlay on images
+        //text attributes similar to Meme Editor Text Fields
         cell.cellTopTextField.defaultTextAttributes = memeCellTextAttributes
         cell.cellBottomTextField.defaultTextAttributes = memeCellTextAttributes
         
+        //Center allignment
         cell.cellTopTextField.textAlignment = NSTextAlignment.Center
         cell.cellBottomTextField.textAlignment = NSTextAlignment.Center
         
+        //Lock fields so they can't be edited
+        cell.cellTopTextField.enabled = false
+        cell.cellBottomTextField.enabled = false
+        
+        //display text on top of original image for cleaner presentation
         cell.cellTopTextField.text = meme.topText
         cell.cellBottomTextField.text = meme.bottomText
-        
+        cell.memeCellImageView.image = meme.origImage
         
         return cell
     }
