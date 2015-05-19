@@ -87,9 +87,6 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         //assign attributes to textFields, set background color to translucent
         self.topTextField.defaultTextAttributes = memeTextAttributes
         self.bottomTextField.defaultTextAttributes = memeTextAttributes
-        
-        //make background clear
-        self.topTextField.backgroundColor = UIColor.clearColor()
 
         //Set individual fields delegate properties for TOP and BOTTOM
         self.topTextFieldDelegate.position = .Top
