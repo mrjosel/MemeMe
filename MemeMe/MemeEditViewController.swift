@@ -39,12 +39,8 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     ]
     
     //TODO
-    //      - fix disappearing tabBars
     //      - center pick/camera buttons, add icons instead of text
-    //      - keep textField text same size
-    //      - non-centered textFields after rendering?
     //      - blurry image after rendering?
-    //      - better image presentation in tableVC and MemeDetailVC
     //      - CODE CLEANUP
 
 

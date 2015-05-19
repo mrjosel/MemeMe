@@ -193,7 +193,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6831" y="-823"/>
+            <point key="canvasLocation" x="5053.5" y="-1567"/>
         </scene>
         <!--Sent Memes Tab Bar Controller-->
         <scene sceneID="eot-Ob-0iA">
@@ -266,7 +266,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DEE-3o-8uF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6076.5" y="-823"/>
+            <point key="canvasLocation" x="6172.5" y="-483"/>
         </scene>
         <!--Item-->
         <scene sceneID="14S-A6-lqQ">
