@@ -34,9 +34,8 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     let memeTextAttributes = [
         NSStrokeColorAttributeName : UIColor.blackColor(),
         NSForegroundColorAttributeName : UIColor.whiteColor(),
-        NSBackgroundColorAttributeName : UIColor.clearColor(),
         NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-        NSStrokeWidthAttributeName : 3.0
+        NSStrokeWidthAttributeName : -3.0
     ]
     
     //TODO
@@ -91,6 +90,9 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         //assign attributes to textFields, set background color to translucent
         self.topTextField.defaultTextAttributes = memeTextAttributes
         self.bottomTextField.defaultTextAttributes = memeTextAttributes
+        
+        //make background clear
+        self.topTextField.backgroundColor = UIColor.clearColor()
 
         //Set individual fields delegate properties for TOP and BOTTOM
         self.topTextFieldDelegate.position = .Top

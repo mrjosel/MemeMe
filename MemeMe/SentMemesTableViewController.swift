@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SentMemesTableViewController: UIViewController, UITableViewDataSource {
+class SentMemesTableViewController: UITableViewController, UITableViewDataSource {
     
     @IBOutlet weak var addMemeButton: UIBarButtonItem!
     var memes : [MemeImage]!
@@ -17,6 +17,7 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource {
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
         self.memes = appDelegate.memes
+        self.tableView.reloadData() //repopulates cells
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -38,24 +39,23 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource {
         self.navigationController?.presentViewController(editVC, animated: true, completion: nil)
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //returns size of memes array to populate table
         return memes.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        println("cellForRowAtIndexPath")
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCellWithIdentifier("memeCell") as! UITableViewCell
         let meme = self.memes[indexPath.row]
         
         // Set the name and image
         cell.textLabel?.text = meme.topText + " " + meme.bottomText
-        cell.imageView?.image = meme.memedImage
+        cell.imageView?.image = meme.origImage
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var detailController = self.storyboard?.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
         detailController.loadedMeme = self.memes[indexPath.row]
         self.navigationController?.pushViewController(detailController, animated: true)
