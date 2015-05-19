@@ -11,20 +11,38 @@ import UIKit
 class SentMemesTableViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var addMemeButton: UIBarButtonItem!
-    var memes : [MemeImage]!
+    var memes : [MemeImage] = []
+    
+    override func viewWillAppear(animated: Bool) {
+        let object = UIApplication.sharedApplication().delegate
+        let appDelegate = object as! AppDelegate
+        self.memes = appDelegate.memes
+//        println(self.memes.count)
+//        println(self.memes)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.        
-        let object = UIApplication.sharedApplication().delegate
-        let appDelegate = object as! AppDelegate
-        self.memes = appDelegate.memes
+//        let object = UIApplication.sharedApplication().delegate
+//        let appDelegate = object as! AppDelegate
+//        self.memes = appDelegate.memes
+//        println(memes)
+//        println(memes.count)
+        
+        //load memes array
+//        let object = UIApplication.sharedApplication().delegate
+//        let appDelegate = object as! AppDelegate
+//        self.memes = appDelegate.memes
+        //println(self.memes.count)
     }
     
     @IBAction func returnToMemeEditor(sender: UIBarButtonItem) {
         //dissmiss VC and return to MemeEditVC
-        self.dismissViewControllerAnimated(false, completion: nil)
+        //self.dismissViewControllerAnimated(false, completion: nil)
+        var editVC = self.storyboard?.instantiateViewControllerWithIdentifier("MemeEditViewController") as! MemeEditViewController
+        self.navigationController?.presentViewController(editVC, animated: true, completion: nil)
     }
     
     
@@ -35,11 +53,12 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource {
         // Set the name and image
         cell.textLabel?.text = meme.topText + " " + meme.bottomText
         cell.imageView?.image = meme.memedImage
-        
         return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        println(memes.count)
+
         return memes.count
     }
     

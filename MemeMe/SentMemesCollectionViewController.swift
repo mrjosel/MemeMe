@@ -10,24 +10,37 @@ import UIKit
 
 class SentMemesCollectionViewController: UIViewController, UICollectionViewDataSource {
 
+    @IBOutlet weak var addMemeButton: UIBarButtonItem!
     //array of saved memes
     var memes : [MemeImage]!
+    
+    override func viewWillAppear(animated: Bool) {
+        //load memes array
+        let object = UIApplication.sharedApplication().delegate
+        let appDelegate = object as! AppDelegate
+        self.memes = appDelegate.memes
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-        //load memes array
-        let object = UIApplication.sharedApplication().delegate
-        let appDelegate = object as! AppDelegate
-        self.memes = appDelegate.memes
+//        //load memes array
+//        let object = UIApplication.sharedApplication().delegate
+//        let appDelegate = object as! AppDelegate
+//        self.memes = appDelegate.memes
+        println(self.memes.count)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func returnToMemeEditor(sender: UIBarButtonItem) {
+    }
+    
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //gets size of collection

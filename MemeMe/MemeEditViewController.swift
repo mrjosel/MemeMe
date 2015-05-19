@@ -19,6 +19,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var navBar: UINavigationBar!
     
     
     
@@ -61,6 +62,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func setDefaultParams() {   //various params that change depending on user activity, method allows user to restore defaults
+
         //empty meme object and empty UIImageView
         self.memeImage = MemeImage()        //already set empty by class declaration, added here so user an restore defaults later
         self.imageView.image = UIImage()    //blank image
@@ -122,10 +124,11 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         //dismisses activityVC and shows SentMemesTableViewController upon activity finish
         activityVC.completionWithItemsHandler = {activity, completed, items, error in
             if completed {
-                var sentMemesVC : UITabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("SentMemesTabVC") as! UITabBarController
+                //var sentMemesVC : UITabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("SentMemesTabVC") as! UITabBarController
                 self.dismissViewControllerAnimated(true, completion: nil)
                 self.setDefaultParams() //make defaults for when returning from sentMemesVC
-                self.presentViewController(sentMemesVC, animated: true, completion: nil)
+                //self.presentViewController(sentMemesVC, animated: true, completion: nil)
+                self.dismissViewControllerAnimated(true, completion: nil)
             }
         }
         //present view controller
@@ -137,7 +140,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         self.view.endEditing(true)
         
         //remove toolbar and navbar
-        self.navigationController?.navigationBar.hidden = true
+        self.navBar.hidden = true
         self.toolbar.hidden = true
         
         //finish editing both textFields
@@ -151,7 +154,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         UIGraphicsEndImageContext()
         
         //restore toolbar and navbar
-        self.navigationController?.navigationBar.hidden = false
+        self.navBar.hidden = false
         self.toolbar.hidden = false
         
         return memedImage
@@ -216,8 +219,9 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         self.view.endEditing(true)  //removes keyboard from view
         
         //transitions to SentMemesTableViewController as per criteria
-        var sentMemesVC : UITabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("sentMemesTabVC") as! UITabBarController
-        self.presentViewController(sentMemesVC, animated: false, completion: nil)
+//        var sentMemesVC : UITabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("sentMemesTabVC") as! UITabBarController
+//        self.presentViewController(sentMemesVC, animated: false, completion: nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     
