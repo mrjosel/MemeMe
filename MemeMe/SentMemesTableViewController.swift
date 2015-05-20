@@ -58,7 +58,9 @@ class SentMemesTableViewController: UITableViewController, UITableViewDataSource
         
         // Set the name and image
         cell.textLabel?.text = meme.topText + " " + meme.bottomText
-        cell.imageView?.image = meme.origImage
+        cell.imageView?.contentMode = UIViewContentMode.ScaleAspectFill
+        cell.imageView?.backgroundColor = UIColor.grayColor()
+        cell.imageView?.image = meme.memedImage
         return cell
     }
     
@@ -67,6 +69,10 @@ class SentMemesTableViewController: UITableViewController, UITableViewDataSource
         var detailController = self.storyboard?.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
         detailController.loadedMeme = self.memes[indexPath.row]
         self.navigationController?.pushViewController(detailController, animated: true)
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 75.0
     }
 
     override func didReceiveMemoryWarning() {

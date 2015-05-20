@@ -39,7 +39,8 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     ]
     
     //TODO
-    //      - center pick/camera buttons, add icons instead of text
+    //      - resize image in TableCell
+    //      - center pick/camera buttons
     //      - blurry image after rendering?
     //      - CODE CLEANUP
 
