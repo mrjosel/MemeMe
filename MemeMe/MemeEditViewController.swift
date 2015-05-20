@@ -58,12 +58,6 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func setDefaultParams() {   //various params that change depending on user activity, method allows user to restore defaults
-        //set background color
-        self.view.backgroundColor = UIColor.blackColor()
-        
-        //adjust flex space on toolbar
-        self.tabBarSpacingItem.width = 125.0
-        
         //empty meme object and empty UIImageView
         self.memeImage = MemeImage()        //already set empty by class declaration, added here so user an restore defaults later
         self.imageView.image = UIImage()    //blank image
@@ -82,6 +76,12 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        //set background color
+        self.view.backgroundColor = UIColor.blackColor()
+        
+        //adjust flex space on toolbar
+        self.tabBarSpacingItem.width = 125.0
         
         //set default params, see method above
         self.setDefaultParams()
