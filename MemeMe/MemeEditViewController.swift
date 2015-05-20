@@ -12,7 +12,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     
     //Outlets
     @IBOutlet weak var toolbar: UIToolbar!
-    @IBOutlet weak var pickButton: UIBarButtonItem!
+    @IBOutlet weak var albumButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -20,7 +20,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var navBar: UINavigationBar!
-    
+    @IBOutlet weak var tabBarSpacingItem: UIBarButtonItem!
     
     
     //testField delegates
@@ -58,7 +58,12 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func setDefaultParams() {   //various params that change depending on user activity, method allows user to restore defaults
-
+        //set background color
+        self.view.backgroundColor = UIColor.blackColor()
+        
+        //adjust flex space on toolbar
+        self.tabBarSpacingItem.width = 125.0
+        
         //empty meme object and empty UIImageView
         self.memeImage = MemeImage()        //already set empty by class declaration, added here so user an restore defaults later
         self.imageView.image = UIImage()    //blank image
@@ -70,7 +75,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         self.bottomTextField.hidden = true
         
         //original button settings, camera button initial view set if present or not
-        self.pickButton.enabled = true
+        self.albumButton.enabled = true
         self.shareButton.enabled = false
     }
     
@@ -212,7 +217,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     
-    @IBAction func imagePicker(sender: UIBarButtonItem) {
+    @IBAction func launchAlbum(sender: UIBarButtonItem) {
         //presents UIImagePickerController
         let pickerController = UIImagePickerController()
         pickerController.delegate = self

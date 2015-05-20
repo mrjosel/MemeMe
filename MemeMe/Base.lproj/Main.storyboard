@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Sce-6O-ccs">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -23,12 +24,13 @@
                                     <constraint firstAttribute="width" constant="600" id="R2X-LY-pwu"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem title="Pick" id="Qgo-Ph-79d">
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="Xe4-bO-d2W"/>
+                                    <barButtonItem title="Album" id="Qgo-Ph-79d">
                                         <connections>
-                                            <action selector="imagePicker:" destination="vXZ-lx-hvc" id="tQJ-6a-RdN"/>
+                                            <action selector="launchAlbum:" destination="vXZ-lx-hvc" id="xiW-7I-Y5V"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Camera" id="qMj-Sh-4Kz">
+                                    <barButtonItem systemItem="camera" id="qMj-Sh-4Kz">
                                         <connections>
                                             <action selector="useCamera:" destination="vXZ-lx-hvc" id="CaE-hG-sJm"/>
                                         </connections>
@@ -47,6 +49,7 @@
                             </toolbar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8qe-7G-nyE">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sj0-Xh-Nfd">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
@@ -66,12 +69,12 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="Meme Editor" id="DZg-Fi-DKl">
-                                        <barButtonItem key="leftBarButtonItem" title="Share" id="PaX-ky-cmO">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="PaX-ky-cmO">
                                             <connections>
                                                 <action selector="shareMeme:" destination="vXZ-lx-hvc" id="kSK-YB-66b"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="6p6-lw-nAP">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="6p6-lw-nAP">
                                             <connections>
                                                 <action selector="cancelMeme:" destination="vXZ-lx-hvc" id="S6d-ez-kng"/>
                                             </connections>
@@ -129,6 +132,16 @@
                                 <exclude reference="hvZ-8u-7nX"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="8gi-em-YpD"/>
+                                <exclude reference="raT-oR-7om"/>
+                                <exclude reference="Gbj-Cl-dwF"/>
+                                <exclude reference="cA2-cy-bGO"/>
+                                <exclude reference="eNU-eA-hEI"/>
+                                <exclude reference="3yp-n5-9GO"/>
+                                <exclude reference="EFY-kZ-RoC"/>
+                                <exclude reference="NER-Kq-Llm"/>
+                                <exclude reference="aZv-DS-a95"/>
+                                <exclude reference="ZQd-mS-LrQ"/>
                                 <exclude reference="0Ou-JP-dGb"/>
                                 <exclude reference="Rl5-V2-ItQ"/>
                                 <exclude reference="3zU-eo-Ymj"/>
@@ -137,16 +150,6 @@
                                 <exclude reference="dVy-s4-23b"/>
                                 <exclude reference="ekd-5b-lf9"/>
                                 <exclude reference="qdb-2o-nM7"/>
-                                <exclude reference="Gbj-Cl-dwF"/>
-                                <exclude reference="cA2-cy-bGO"/>
-                                <exclude reference="eNU-eA-hEI"/>
-                                <exclude reference="8gi-em-YpD"/>
-                                <exclude reference="raT-oR-7om"/>
-                                <exclude reference="3yp-n5-9GO"/>
-                                <exclude reference="EFY-kZ-RoC"/>
-                                <exclude reference="NER-Kq-Llm"/>
-                                <exclude reference="aZv-DS-a95"/>
-                                <exclude reference="ZQd-mS-LrQ"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -157,6 +160,16 @@
                                 <include reference="hvZ-8u-7nX"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="8gi-em-YpD"/>
+                                <include reference="raT-oR-7om"/>
+                                <include reference="Gbj-Cl-dwF"/>
+                                <include reference="cA2-cy-bGO"/>
+                                <include reference="eNU-eA-hEI"/>
+                                <include reference="3yp-n5-9GO"/>
+                                <include reference="EFY-kZ-RoC"/>
+                                <include reference="NER-Kq-Llm"/>
+                                <include reference="aZv-DS-a95"/>
+                                <include reference="ZQd-mS-LrQ"/>
                                 <include reference="0Ou-JP-dGb"/>
                                 <include reference="Rl5-V2-ItQ"/>
                                 <include reference="3zU-eo-Ymj"/>
@@ -165,28 +178,19 @@
                                 <include reference="dVy-s4-23b"/>
                                 <include reference="ekd-5b-lf9"/>
                                 <include reference="qdb-2o-nM7"/>
-                                <include reference="Gbj-Cl-dwF"/>
-                                <include reference="cA2-cy-bGO"/>
-                                <include reference="eNU-eA-hEI"/>
-                                <include reference="8gi-em-YpD"/>
-                                <include reference="raT-oR-7om"/>
-                                <include reference="3yp-n5-9GO"/>
-                                <include reference="EFY-kZ-RoC"/>
-                                <include reference="NER-Kq-Llm"/>
-                                <include reference="aZv-DS-a95"/>
-                                <include reference="ZQd-mS-LrQ"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="0dY-Oe-wVr"/>
                     <connections>
+                        <outlet property="albumButton" destination="Qgo-Ph-79d" id="dyb-aa-OQl"/>
                         <outlet property="bottomTextField" destination="8ui-9w-4z9" id="YdY-EQ-EmW"/>
                         <outlet property="cameraButton" destination="qMj-Sh-4Kz" id="c0y-cX-xYt"/>
                         <outlet property="cancelButton" destination="6p6-lw-nAP" id="X3j-F9-z1w"/>
                         <outlet property="imageView" destination="8qe-7G-nyE" id="1ch-3m-9WX"/>
                         <outlet property="navBar" destination="hvZ-8u-7nX" id="HBf-HV-XeR"/>
-                        <outlet property="pickButton" destination="Qgo-Ph-79d" id="uK3-nn-m19"/>
                         <outlet property="shareButton" destination="PaX-ky-cmO" id="UVE-1X-sqm"/>
+                        <outlet property="tabBarSpacingItem" destination="Xe4-bO-d2W" id="jtV-Ua-vbT"/>
                         <outlet property="toolbar" destination="Cah-CV-4jo" id="Rrr-5N-XKC"/>
                         <outlet property="topTextField" destination="Sj0-Xh-Nfd" id="zuS-uQ-IZU"/>
                     </connections>
@@ -228,6 +232,7 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lob-E2-ZvZ">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -242,10 +247,10 @@
                                 <exclude reference="lob-E2-ZvZ"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="dAj-Ga-22a"/>
                                 <exclude reference="GBU-mi-8pC"/>
                                 <exclude reference="p9f-ee-01f"/>
                                 <exclude reference="sp2-oz-14i"/>
-                                <exclude reference="dAj-Ga-22a"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -253,10 +258,10 @@
                                 <include reference="lob-E2-ZvZ"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="dAj-Ga-22a"/>
                                 <include reference="GBU-mi-8pC"/>
                                 <include reference="p9f-ee-01f"/>
                                 <include reference="sp2-oz-14i"/>
-                                <include reference="dAj-Ga-22a"/>
                             </mask>
                         </variation>
                     </view>
@@ -268,11 +273,11 @@
             </objects>
             <point key="canvasLocation" x="6172.5" y="-483"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="14S-A6-lqQ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="atG-Vb-Pp6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="APx-aI-rlk"/>
+                    <tabBarItem key="tabBarItem" title="" image="tableButton" id="APx-aI-rlk"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="CHe-Nf-iGu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -309,7 +314,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Sent Memes" id="8wM-CI-adV">
-                        <barButtonItem key="rightBarButtonItem" title="Add" id="6EZ-fu-anU">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="6EZ-fu-anU">
                             <connections>
                                 <action selector="returnToMemeEditor:" destination="5CM-cb-2Gu" id="VsG-g7-XFu"/>
                             </connections>
@@ -323,11 +328,11 @@
             </objects>
             <point key="canvasLocation" x="5053.5" y="-823"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="xCM-b5-rJk">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Riw-XY-iQA" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="hoT-2g-8vs"/>
+                    <tabBarItem key="tabBarItem" title="" image="collectionButton" id="hoT-2g-8vs"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PHi-IM-EQ6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -416,7 +421,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Sent Memes" id="Jig-g0-pYv">
-                        <barButtonItem key="rightBarButtonItem" title="Add" id="bWf-UG-IXE">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="bWf-UG-IXE">
                             <connections>
                                 <action selector="returnToMemeEditor:" destination="iyS-Dg-dSD" id="JYg-2B-G40"/>
                             </connections>
@@ -431,4 +436,8 @@
             <point key="canvasLocation" x="5043" y="-139"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="collectionButton" width="30" height="30"/>
+        <image name="tableButton" width="30" height="30"/>
+    </resources>
 </document>
