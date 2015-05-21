@@ -63,8 +63,7 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath:NSIndexPath) {
         //displays meme image for viewing
         let detailController = self.storyboard?.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
-        detailController.loadedMeme = self.memes[indexPath.row]
-        detailController.memeIndex = indexPath.row
+        detailController.memeIndex = indexPath.row  //MemeDetailVC loads meme objects directly from index
         self.navigationController?.pushViewController(detailController, animated: true)
     }
         

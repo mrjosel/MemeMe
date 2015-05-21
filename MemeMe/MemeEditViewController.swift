@@ -56,6 +56,8 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         //subscribe to keyboard notifications to allow for resizing view when needed
         self.subscribeToKeyboardNotifications()
         
+        
+        //if meme is present, then editMode must be true, set the following params to allow editing
         if let meme = self.memeImage {
             self.editMode = true
             self.shareButton.enabled = true
@@ -65,6 +67,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
             self.bottomTextField.hidden = false
             self.bottomTextField.text = meme.bottomText
         } else {
+            //if meme optional is nil, then its a new meme and editMode is false
             self.editMode = false
         }
     }
