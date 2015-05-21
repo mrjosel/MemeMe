@@ -22,13 +22,12 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var tabBarSpacingItem: UIBarButtonItem!
     
-    
     //testField delegates
     let topTextFieldDelegate = MemeTextDelegate()
     let bottomTextFieldDelegate = MemeTextDelegate()
     
     //memeImage object
-    var memeImage = MemeImage()
+    var memeImage: MemeImage?
     
     //set textField attributes (font, size, etc)
     let memeTextAttributes = [
@@ -47,11 +46,21 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
 
     
     override func viewWillAppear(animated: Bool) {
-        
         //limits camera button in simulator, only allows on HW where camera is suported
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         //subscribe to keyboard notifications to allow for resizing view when needed
         self.subscribeToKeyboardNotifications()
+        
+        if let meme = self.memeImage {
+            self.shareButton.enabled = true
+            self.imageView.image = meme.origImage
+            self.topTextField.hidden = false
+            self.topTextField.text = meme.topText
+            self.bottomTextField.hidden = false
+            self.bottomTextField.text = meme.bottomText
+        } else {
+            println(self.memeImage)
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -60,7 +69,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     
     func setDefaultParams() {   //various params that change depending on user activity, method allows user to restore defaults
         //empty meme object and empty UIImageView
-        self.memeImage = MemeImage()        //already set empty by class declaration, added here so user an restore defaults later
+        //self.memeImage = MemeImage()        //already set empty by class declaration, added here so user an restore defaults later
         self.imageView.image = UIImage()    //blank image
         
         //default text, hidden prior to image selection
@@ -77,9 +86,10 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        //set background color
+
+        //set background color and image scaling aspect
         self.view.backgroundColor = UIColor.blackColor()
+        self.imageView.contentMode = UIViewContentMode.ScaleAspectFit
         
         //adjust flex space on toolbar
         self.tabBarSpacingItem.width = 125.0
@@ -110,10 +120,10 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         //share MemeImages across all ViewControllers
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
-        appDelegate.memes.append(self.memeImage)
+        appDelegate.memes.append(self.memeImage!)
 
         //create instance of UIActivityViewController, exclude various sharing activities
-        let activityVC : UIActivityViewController = UIActivityViewController(activityItems: [self.memeImage.memedImage], applicationActivities: nil)  //need to fix applicationActivities
+        let activityVC : UIActivityViewController = UIActivityViewController(activityItems: [self.memeImage!.memedImage], applicationActivities: nil)  //need to fix applicationActivities
         activityVC.excludedActivityTypes = [UIActivityTypePostToVimeo, UIActivityTypePostToWeibo,
                                             UIActivityTypePostToTencentWeibo, UIActivityTypeAddToReadingList,
                                             UIActivityTypeAirDrop, UIActivityTypeAssignToContact]
@@ -194,8 +204,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         //presents chosen image to view, reveals textFeilds for editing
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.imageView.image = image
-            self.memeImage.origImage = image
-            self.imageView.contentMode = UIViewContentMode.ScaleAspectFit
+            self.memeImage?.origImage = image
         }
         self.dismissViewControllerAnimated(true, completion: nil)   //dismisses pickerController
         //reveals textFields and shareButton for editing

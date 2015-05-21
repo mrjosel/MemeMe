@@ -234,34 +234,58 @@
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0gl-6s-8hw">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem title="Item" systemItem="edit" id="ngz-wh-u9t">
+                                        <connections>
+                                            <action selector="editMeme:" destination="KnE-g1-b2b" id="hVI-Ps-iQc"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="lob-E2-ZvZ" firstAttribute="leading" secondItem="2En-ab-2NQ" secondAttribute="leadingMargin" constant="-16" id="GBU-mi-8pC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="0gl-6s-8hw" secondAttribute="trailing" constant="-16" id="HD5-jW-0An"/>
+                            <constraint firstItem="0gl-6s-8hw" firstAttribute="leading" secondItem="2En-ab-2NQ" secondAttribute="leadingMargin" constant="-16" id="Jqn-6M-U2v"/>
+                            <constraint firstItem="0gl-6s-8hw" firstAttribute="top" secondItem="KxR-aY-TXu" secondAttribute="bottom" constant="536" id="SOF-0z-vVk"/>
                             <constraint firstItem="bkh-rX-OSf" firstAttribute="top" secondItem="lob-E2-ZvZ" secondAttribute="bottom" id="dAj-Ga-22a"/>
+                            <constraint firstItem="bkh-rX-OSf" firstAttribute="top" secondItem="0gl-6s-8hw" secondAttribute="bottom" id="ofn-wb-ods"/>
                             <constraint firstItem="lob-E2-ZvZ" firstAttribute="top" secondItem="2En-ab-2NQ" secondAttribute="topMargin" id="p9f-ee-01f"/>
                             <constraint firstAttribute="trailingMargin" secondItem="lob-E2-ZvZ" secondAttribute="trailing" constant="-16" id="sp2-oz-14i"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="lob-E2-ZvZ"/>
+                                <exclude reference="0gl-6s-8hw"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="dAj-Ga-22a"/>
                                 <exclude reference="GBU-mi-8pC"/>
                                 <exclude reference="p9f-ee-01f"/>
                                 <exclude reference="sp2-oz-14i"/>
+                                <exclude reference="HD5-jW-0An"/>
+                                <exclude reference="Jqn-6M-U2v"/>
+                                <exclude reference="SOF-0z-vVk"/>
+                                <exclude reference="dAj-Ga-22a"/>
+                                <exclude reference="ofn-wb-ods"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="lob-E2-ZvZ"/>
+                                <include reference="0gl-6s-8hw"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="dAj-Ga-22a"/>
                                 <include reference="GBU-mi-8pC"/>
                                 <include reference="p9f-ee-01f"/>
                                 <include reference="sp2-oz-14i"/>
+                                <include reference="HD5-jW-0An"/>
+                                <include reference="Jqn-6M-U2v"/>
+                                <include reference="SOF-0z-vVk"/>
+                                <include reference="dAj-Ga-22a"/>
+                                <include reference="ofn-wb-ods"/>
                             </mask>
                         </variation>
                     </view>

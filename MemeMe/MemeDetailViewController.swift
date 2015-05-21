@@ -21,14 +21,21 @@ class MemeDetailViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         //hide tabBar from view
-        tabBarController?.tabBar.hidden = true
+        self.tabBarController?.tabBar.hidden = true
         
         //display memedImage
         self.savedMemeImageView.image = self.loadedMeme.memedImage
         self.savedMemeImageView.contentMode = UIViewContentMode.ScaleAspectFit
 
     }
-
+    
+    @IBAction func editMeme(sender: UIBarButtonItem) {
+        //present MemeEditVC
+        var memeEditVC = self.storyboard?.instantiateViewControllerWithIdentifier("MemeEditViewController") as! MemeEditViewController
+        memeEditVC.memeImage = self.loadedMeme
+        self.navigationController?.presentViewController(memeEditVC, animated: true, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
