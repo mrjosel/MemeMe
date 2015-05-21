@@ -29,7 +29,6 @@ class MemeDetailViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        println(memeIndex)
         //hide tabBar from view
         self.tabBarController?.tabBar.hidden = true
         

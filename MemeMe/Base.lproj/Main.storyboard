@@ -236,6 +236,11 @@
                             </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0gl-6s-8hw">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="GUE-PG-Tz0"/>
+                                    <constraint firstAttribute="height" constant="34" id="gTL-6E-swr"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="kUd-Rc-vcw"/>
+                                </constraints>
                                 <items>
                                     <barButtonItem title="Item" systemItem="edit" id="ngz-wh-u9t">
                                         <connections>
@@ -243,6 +248,20 @@
                                         </connections>
                                     </barButtonItem>
                                 </items>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="GUE-PG-Tz0"/>
+                                        <exclude reference="gTL-6E-swr"/>
+                                        <exclude reference="kUd-Rc-vcw"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <exclude reference="GUE-PG-Tz0"/>
+                                        <exclude reference="gTL-6E-swr"/>
+                                        <include reference="kUd-Rc-vcw"/>
+                                    </mask>
+                                </variation>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -250,7 +269,6 @@
                             <constraint firstItem="lob-E2-ZvZ" firstAttribute="leading" secondItem="2En-ab-2NQ" secondAttribute="leadingMargin" constant="-16" id="GBU-mi-8pC"/>
                             <constraint firstAttribute="trailingMargin" secondItem="0gl-6s-8hw" secondAttribute="trailing" constant="-16" id="HD5-jW-0An"/>
                             <constraint firstItem="0gl-6s-8hw" firstAttribute="leading" secondItem="2En-ab-2NQ" secondAttribute="leadingMargin" constant="-16" id="Jqn-6M-U2v"/>
-                            <constraint firstItem="0gl-6s-8hw" firstAttribute="top" secondItem="KxR-aY-TXu" secondAttribute="bottom" constant="536" id="SOF-0z-vVk"/>
                             <constraint firstItem="bkh-rX-OSf" firstAttribute="top" secondItem="lob-E2-ZvZ" secondAttribute="bottom" id="dAj-Ga-22a"/>
                             <constraint firstItem="bkh-rX-OSf" firstAttribute="top" secondItem="0gl-6s-8hw" secondAttribute="bottom" id="ofn-wb-ods"/>
                             <constraint firstItem="lob-E2-ZvZ" firstAttribute="top" secondItem="2En-ab-2NQ" secondAttribute="topMargin" id="p9f-ee-01f"/>
@@ -267,7 +285,6 @@
                                 <exclude reference="sp2-oz-14i"/>
                                 <exclude reference="HD5-jW-0An"/>
                                 <exclude reference="Jqn-6M-U2v"/>
-                                <exclude reference="SOF-0z-vVk"/>
                                 <exclude reference="dAj-Ga-22a"/>
                                 <exclude reference="ofn-wb-ods"/>
                             </mask>
@@ -283,7 +300,6 @@
                                 <include reference="sp2-oz-14i"/>
                                 <include reference="HD5-jW-0An"/>
                                 <include reference="Jqn-6M-U2v"/>
-                                <include reference="SOF-0z-vVk"/>
                                 <include reference="dAj-Ga-22a"/>
                                 <include reference="ofn-wb-ods"/>
                             </mask>
@@ -295,7 +311,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DEE-3o-8uF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6172.5" y="-483"/>
+            <point key="canvasLocation" x="5743.5" y="-1567"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="14S-A6-lqQ">
