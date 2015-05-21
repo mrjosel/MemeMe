@@ -68,6 +68,7 @@ class SentMemesTableViewController: UITableViewController, UITableViewDataSource
         //displays meme image for viewing
         var detailController = self.storyboard?.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
         detailController.loadedMeme = self.memes[indexPath.row]
+        detailController.memeIndex = indexPath.row
         self.navigationController?.pushViewController(detailController, animated: true)
     }
     

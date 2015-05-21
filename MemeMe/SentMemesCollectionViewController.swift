@@ -64,6 +64,7 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
         //displays meme image for viewing
         let detailController = self.storyboard?.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
         detailController.loadedMeme = self.memes[indexPath.row]
+        detailController.memeIndex = indexPath.row
         self.navigationController?.pushViewController(detailController, animated: true)
     }
         

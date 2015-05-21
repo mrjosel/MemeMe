@@ -22,6 +22,10 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var tabBarSpacingItem: UIBarButtonItem!
     
+    //ability to know if editing an existing meme or not
+    var editMode: Bool!
+    var index: Int?
+    
     //testField delegates
     let topTextFieldDelegate = MemeTextDelegate()
     let bottomTextFieldDelegate = MemeTextDelegate()
@@ -38,6 +42,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     ]
     
     //TODO
+    //      - add overwriting, clean up methods
     //      - resize image in TableCell
     //      - center pick/camera buttons
     //      - blurry image after rendering?
@@ -52,6 +57,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         self.subscribeToKeyboardNotifications()
         
         if let meme = self.memeImage {
+            self.editMode = true
             self.shareButton.enabled = true
             self.imageView.image = meme.origImage
             self.topTextField.hidden = false
@@ -59,7 +65,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
             self.bottomTextField.hidden = false
             self.bottomTextField.text = meme.bottomText
         } else {
-            println(self.memeImage)
+            self.editMode = false
         }
     }
     
@@ -120,7 +126,13 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         //share MemeImages across all ViewControllers
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
-        appDelegate.memes.append(self.memeImage!)
+        
+        //if new meme, add to array.  if editing, overwrite that index
+        if !editMode {
+            appDelegate.memes.append(self.memeImage!)
+        } else {
+            appDelegate.memes[index!] = self.memeImage!
+        }
 
         //create instance of UIActivityViewController, exclude various sharing activities
         let activityVC : UIActivityViewController = UIActivityViewController(activityItems: [self.memeImage!.memedImage], applicationActivities: nil)  //need to fix applicationActivities
