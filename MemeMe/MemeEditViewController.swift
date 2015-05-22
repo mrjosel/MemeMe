@@ -20,7 +20,8 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var navBar: UINavigationBar!
-    @IBOutlet weak var tabBarSpacingItem: UIBarButtonItem!
+    @IBOutlet weak var tabBarSpacingItemL: UIBarButtonItem! //not set in VC, default behavior is desired behavior
+    @IBOutlet weak var tabBarSpacingItemR: UIBarButtonItem! //not set in VC, default behavior is desired behavior
     
     //ability to know if editing an existing meme or not
     var editMode: Bool!
@@ -42,9 +43,8 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     ]
     
     //TODO
-    //      - add overwriting, clean up methods
     //      - resize image in TableCell
-    //      - center pick/camera buttons
+    //      - clean up methods
     //      - blurry image after rendering?
     //      - CODE CLEANUP
 
@@ -99,9 +99,6 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         //set background color and image scaling aspect
         self.view.backgroundColor = UIColor.blackColor()
         self.imageView.contentMode = UIViewContentMode.ScaleAspectFit
-        
-        //adjust flex space on toolbar
-        self.tabBarSpacingItem.width = 125.0
         
         //set default params, see method above
         self.setDefaultParams()
