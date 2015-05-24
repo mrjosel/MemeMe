@@ -101,6 +101,4 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
         return cell
     }
     
-    
-    
 }

@@ -34,7 +34,6 @@ class MemeDetailViewController: UIViewController {
         
         //set image aspect view
         self.savedMemeImageView.contentMode = UIViewContentMode.ScaleAspectFit
-
     }
     
     @IBAction func editMeme(sender: UIBarButtonItem) {

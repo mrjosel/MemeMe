@@ -29,7 +29,7 @@ class SentMemesTableViewController: UITableViewController, UITableViewDataSource
     
     //shared array of memes
     var memes : [MemeImage]?
-    
+
     override func viewWillAppear(animated: Bool) {
         //keep tabBar in view
         self.tabBarController?.tabBar.hidden = false
@@ -41,7 +41,6 @@ class SentMemesTableViewController: UITableViewController, UITableViewDataSource
         self.tableView.reloadData() //repopulates cells
 
     }
-
     
     override func viewDidAppear(animated: Bool) {
         //present Meme Editor if no memes in array, and load "No Saved Memes" to user, else do nothing
@@ -84,6 +83,14 @@ class SentMemesTableViewController: UITableViewController, UITableViewDataSource
         var detailController = self.storyboard?.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
         detailController.memeIndex = indexPath.row  //MemeDetailVC loads meme objects directly from index
         self.navigationController?.pushViewController(detailController, animated: true)
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            self.memes?[indexPath.row].sharedMemesArray("delete", index: indexPath.row)
+            self.memes?.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        }
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
