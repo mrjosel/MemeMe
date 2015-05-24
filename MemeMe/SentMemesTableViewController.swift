@@ -7,6 +7,20 @@
 //
 
 import UIKit
+import Foundation
+
+class MyCustomCell: UITableViewCell {
+    
+    var test = NSLayoutAttribute.TrailingMargin
+    var tester = NSLayoutRelation.Equal
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.imageView?.frame = CGRect(x: 0, y: 0, width: 112.5, height: 75)    //approx landscape image dimensions
+        self.imageView?.backgroundColor = UIColor.grayColor()                   //portrait images have grey background color
+        self.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+    }
+}
 
 class SentMemesTableViewController: UITableViewController, UITableViewDataSource {
     
@@ -28,6 +42,7 @@ class SentMemesTableViewController: UITableViewController, UITableViewDataSource
     }
     
     override func viewDidAppear(animated: Bool) {
+        
         //present Meme Editor if no memes in array, else do nothing
         if self.memes.count == 0 {
             var editVC = self.storyboard?.instantiateViewControllerWithIdentifier("MemeEditViewController") as! MemeEditViewController
@@ -38,6 +53,7 @@ class SentMemesTableViewController: UITableViewController, UITableViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+
     }
     
     @IBAction func returnToMemeEditor(sender: UIBarButtonItem) {
@@ -53,14 +69,13 @@ class SentMemesTableViewController: UITableViewController, UITableViewDataSource
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         //sets cell based on meme in array
-        let cell = tableView.dequeueReusableCellWithIdentifier("memeCell") as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("memeCell") as! MyCustomCell
         let meme = self.memes[indexPath.row]
         
         // Set the name and image
         cell.textLabel?.text = meme.topText + " " + meme.bottomText
-        cell.imageView?.contentMode = UIViewContentMode.ScaleAspectFill
-        cell.imageView?.backgroundColor = UIColor.grayColor()
-        cell.imageView?.image = meme.memedImage
+        cell.imageView?.image = meme.origImage
+
         return cell
     }
     

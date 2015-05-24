@@ -23,6 +23,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var tabBarSpacingItemL: UIBarButtonItem! //not set in VC, default behavior is desired behavior
     @IBOutlet weak var tabBarSpacingItemR: UIBarButtonItem! //not set in VC, default behavior is desired behavior
     
+    
     //ability to know if editing an existing meme or not
     var editMode: Bool!
     var index: Int?
@@ -55,8 +56,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         //subscribe to keyboard notifications to allow for resizing view when needed
         self.subscribeToKeyboardNotifications()
-        
-        
+    
         //if meme is present, then editMode must be true, set the following params to allow editing
         if let meme = self.memeImage {
             self.editMode = true
@@ -123,10 +123,10 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         //create meme object from view
         self.memeImage = MemeImage(userTopText: self.topTextField.text, userBottomText: self.bottomTextField.text, userImage: self.imageView.image!, memedImage: self.generateMemedImage())
         
+        
         //share MemeImages across all ViewControllers
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
-        
         //if new meme, add to array.  if editing, overwrite that index
         if !editMode {
             appDelegate.memes.append(self.memeImage!)
