@@ -90,6 +90,7 @@ class SentMemesTableViewController: UITableViewController, UITableViewDataSource
             self.memes?[indexPath.row].sharedMemesArray("delete", index: indexPath.row)
             self.memes?.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            self.returnToMemeEditor(self.addMemeButton) //returns to MemeEditVC
         }
     }
     

@@ -201,10 +201,10 @@
             </objects>
             <point key="canvasLocation" x="5053.5" y="-1567"/>
         </scene>
-        <!--Sent Memes Tab Bar Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="eot-Ob-0iA">
             <objects>
-                <tabBarController storyboardIdentifier="SentMemesTabVC" id="Sce-6O-ccs" customClass="SentMemesTabBarController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="SentMemesTabVC" id="Sce-6O-ccs" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="GO7-V6-NAg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -236,56 +236,20 @@
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0gl-6s-8hw">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="GUE-PG-Tz0"/>
-                                    <constraint firstAttribute="height" constant="34" id="gTL-6E-swr"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="kUd-Rc-vcw"/>
-                                </constraints>
-                                <items>
-                                    <barButtonItem title="Item" systemItem="edit" id="ngz-wh-u9t">
-                                        <connections>
-                                            <action selector="editMeme:" destination="KnE-g1-b2b" id="hVI-Ps-iQc"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="GUE-PG-Tz0"/>
-                                        <exclude reference="gTL-6E-swr"/>
-                                        <exclude reference="kUd-Rc-vcw"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <exclude reference="GUE-PG-Tz0"/>
-                                        <exclude reference="gTL-6E-swr"/>
-                                        <include reference="kUd-Rc-vcw"/>
-                                    </mask>
-                                </variation>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="lob-E2-ZvZ" firstAttribute="leading" secondItem="2En-ab-2NQ" secondAttribute="leadingMargin" constant="-16" id="GBU-mi-8pC"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="0gl-6s-8hw" secondAttribute="trailing" constant="-16" id="HD5-jW-0An"/>
-                            <constraint firstItem="0gl-6s-8hw" firstAttribute="leading" secondItem="2En-ab-2NQ" secondAttribute="leadingMargin" constant="-16" id="Jqn-6M-U2v"/>
                             <constraint firstItem="bkh-rX-OSf" firstAttribute="top" secondItem="lob-E2-ZvZ" secondAttribute="bottom" id="dAj-Ga-22a"/>
-                            <constraint firstItem="bkh-rX-OSf" firstAttribute="top" secondItem="0gl-6s-8hw" secondAttribute="bottom" id="ofn-wb-ods"/>
                             <constraint firstItem="lob-E2-ZvZ" firstAttribute="top" secondItem="2En-ab-2NQ" secondAttribute="topMargin" id="p9f-ee-01f"/>
                             <constraint firstAttribute="trailingMargin" secondItem="lob-E2-ZvZ" secondAttribute="trailing" constant="-16" id="sp2-oz-14i"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="lob-E2-ZvZ"/>
-                                <exclude reference="0gl-6s-8hw"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="dAj-Ga-22a"/>
-                                <exclude reference="ofn-wb-ods"/>
-                                <exclude reference="HD5-jW-0An"/>
-                                <exclude reference="Jqn-6M-U2v"/>
                                 <exclude reference="GBU-mi-8pC"/>
                                 <exclude reference="p9f-ee-01f"/>
                                 <exclude reference="sp2-oz-14i"/>
@@ -294,13 +258,9 @@
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="lob-E2-ZvZ"/>
-                                <include reference="0gl-6s-8hw"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="dAj-Ga-22a"/>
-                                <include reference="ofn-wb-ods"/>
-                                <include reference="HD5-jW-0An"/>
-                                <include reference="Jqn-6M-U2v"/>
                                 <include reference="GBU-mi-8pC"/>
                                 <include reference="p9f-ee-01f"/>
                                 <include reference="sp2-oz-14i"/>
@@ -463,9 +423,9 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <outlet property="cellBottomTextField" destination="Tx1-m8-cUR" id="ovQ-4v-HLS"/>
-                                    <outlet property="cellTopTextField" destination="al8-jO-dg9" id="HKR-bd-hIf"/>
-                                    <outlet property="memeCellImageView" destination="PHK-Vh-gSP" id="lKd-M8-PGz"/>
+                                    <outlet property="cellBottomTextField" destination="Tx1-m8-cUR" id="JSn-eN-igp"/>
+                                    <outlet property="cellTopTextField" destination="al8-jO-dg9" id="do8-4u-tKA"/>
+                                    <outlet property="memeCellImageView" destination="PHK-Vh-gSP" id="9CQ-9Y-pme"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>

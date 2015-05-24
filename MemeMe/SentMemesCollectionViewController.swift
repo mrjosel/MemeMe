@@ -8,6 +8,14 @@
 
 import UIKit
 
+
+class MemeCollectionViewCell: UICollectionViewCell {
+    
+    @IBOutlet weak var memeCellImageView: UIImageView!
+    @IBOutlet weak var cellTopTextField: UITextField!
+    @IBOutlet weak var cellBottomTextField: UITextField!
+}
+
 class SentMemesCollectionViewController: UICollectionViewController, UICollectionViewDataSource {
 
     //add meme button

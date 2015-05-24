@@ -23,7 +23,7 @@ extension MemeImage: Printable {
 
 public class MemeImage: AnyObject {
     //class for an image that is Meme'ed
-    //class has optional top and bottom UITextField from user input that are used in conjunction with UIImge to render new image with UITextFields superimposed on UIImage.  Method exists in MemeMeViewController
+    //class has optional top and bottom UITextField from user input that are used in conjunction with UIImge to render new image with UITextFields superimposed on UIImage.  Method exists in MemeEditVC
     
     //all variables of MemeImage struct
     //Top and bottom strings, one or more could be optional
@@ -57,7 +57,7 @@ public class MemeImage: AnyObject {
     
     public func sharedMemesArray(action: String, index: Int?) {
         //method for adding new memes, deleting memes, or editing memes in the shared meme array
-        //method is called in all other VCs
+        //method is called in MemeEditVC and used for deletion in SentMemesTableVC
         
         //sets up memes array
         let object = UIApplication.sharedApplication().delegate
@@ -77,12 +77,5 @@ public class MemeImage: AnyObject {
             //error
             println("invalid action")
         }
-    }
-    
-    public func getMemesArray() -> [(MemeImage)] {
-        //gets shared memes aray from appDelegate
-        let object = UIApplication.sharedApplication().delegate
-        let appDelegate = object as! AppDelegate
-        return appDelegate.memes
     }
 }

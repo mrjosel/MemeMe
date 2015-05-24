@@ -29,6 +29,9 @@ class MemeDetailViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        var editButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Edit, target: self, action: "editMeme")
+        navigationItem.rightBarButtonItem = editButton
+        
         //hide tabBar from view
         self.tabBarController?.tabBar.hidden = true
         
@@ -36,7 +39,7 @@ class MemeDetailViewController: UIViewController {
         self.savedMemeImageView.contentMode = UIViewContentMode.ScaleAspectFit
     }
     
-    @IBAction func editMeme(sender: UIBarButtonItem) {
+    func editMeme() {
         //present MemeEditVC
         var memeEditVC = self.storyboard?.instantiateViewControllerWithIdentifier("MemeEditViewController") as! MemeEditViewController
         memeEditVC.memeImage = self.loadedMeme

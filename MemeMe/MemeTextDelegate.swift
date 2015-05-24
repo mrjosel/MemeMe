@@ -10,7 +10,6 @@ import UIKit
 
 enum Position {
     //Enum for Position variable in MemeTextDelegate
-    
     case Top, Bottom
     init () {   //set outside of enum to .Bottom if needed
         self = .Top
@@ -34,16 +33,6 @@ extension Position: Printable {
 }
 
 class MemeTextDelegate: NSObject, UITextFieldDelegate {
-    
-    //Implement this in the future
-    //    override init() {    //need to add default props defined by Enum
-    //        switch (position) {
-    //        case .Top:
-    //            textField.text = "TOP"
-    //        default:
-    //            textField.text = "BOTTOM"
-    //        }
-    //    }
     
     //Delegate variables for top/bottom position, and if user entered text or not
     var position = Position()
