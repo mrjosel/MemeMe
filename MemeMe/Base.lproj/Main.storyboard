@@ -80,6 +80,12 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Czi-mw-N4A"/>
                                 </items>
                             </toolbar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tab Album or camera to get started" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tVW-Pp-n5P">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -90,8 +96,10 @@
                             <constraint firstItem="Sj0-Xh-Nfd" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="Gbj-Cl-dwF">
                                 <variation key="widthClass=compact" constant="52"/>
                             </constraint>
+                            <constraint firstItem="8qe-7G-nyE" firstAttribute="centerX" secondItem="tVW-Pp-n5P" secondAttribute="centerX" id="LDO-Z9-wXZ"/>
                             <constraint firstItem="hvZ-8u-7nX" firstAttribute="leading" secondItem="8qe-7G-nyE" secondAttribute="leading" id="Rl5-V2-ItQ"/>
                             <constraint firstItem="8ui-9w-4z9" firstAttribute="leading" secondItem="4nE-ju-yzP" secondAttribute="leading" id="YIR-r7-Xp6"/>
+                            <constraint firstItem="4nE-ju-yzP" firstAttribute="top" secondItem="tVW-Pp-n5P" secondAttribute="bottom" constant="19" id="ZFO-fS-eqh"/>
                             <constraint firstItem="8qe-7G-nyE" firstAttribute="top" secondItem="hvZ-8u-7nX" secondAttribute="bottom" id="bnb-by-xYj"/>
                             <constraint firstItem="Sj0-Xh-Nfd" firstAttribute="trailing" secondItem="hvZ-8u-7nX" secondAttribute="trailing" id="cA2-cy-bGO"/>
                             <constraint firstItem="4nE-ju-yzP" firstAttribute="top" secondItem="8qe-7G-nyE" secondAttribute="bottom" id="cKV-Jx-RjH"/>
@@ -115,26 +123,29 @@
                                 <exclude reference="8ui-9w-4z9"/>
                                 <exclude reference="hvZ-8u-7nX"/>
                                 <exclude reference="4nE-ju-yzP"/>
+                                <exclude reference="tVW-Pp-n5P"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="evF-uD-BHZ"/>
-                                <exclude reference="8gi-em-YpD"/>
-                                <exclude reference="YIR-r7-Xp6"/>
-                                <exclude reference="gdL-eY-PrA"/>
-                                <exclude reference="Gbj-Cl-dwF"/>
-                                <exclude reference="cA2-cy-bGO"/>
-                                <exclude reference="eNU-eA-hEI"/>
-                                <exclude reference="1cM-WD-sCU"/>
-                                <exclude reference="cKV-Jx-RjH"/>
-                                <exclude reference="iRa-7L-35T"/>
-                                <exclude reference="u06-BZ-QTY"/>
                                 <exclude reference="0Ou-JP-dGb"/>
                                 <exclude reference="Rl5-V2-ItQ"/>
                                 <exclude reference="CoA-yT-3Ew"/>
+                                <exclude reference="LDO-Z9-wXZ"/>
                                 <exclude reference="bnb-by-xYj"/>
                                 <exclude reference="dVy-s4-23b"/>
                                 <exclude reference="ekd-5b-lf9"/>
                                 <exclude reference="qdb-2o-nM7"/>
+                                <exclude reference="Gbj-Cl-dwF"/>
+                                <exclude reference="cA2-cy-bGO"/>
+                                <exclude reference="eNU-eA-hEI"/>
+                                <exclude reference="8gi-em-YpD"/>
+                                <exclude reference="YIR-r7-Xp6"/>
+                                <exclude reference="gdL-eY-PrA"/>
+                                <exclude reference="1cM-WD-sCU"/>
+                                <exclude reference="ZFO-fS-eqh"/>
+                                <exclude reference="cKV-Jx-RjH"/>
+                                <exclude reference="iRa-7L-35T"/>
+                                <exclude reference="u06-BZ-QTY"/>
+                                <exclude reference="evF-uD-BHZ"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -144,26 +155,29 @@
                                 <include reference="8ui-9w-4z9"/>
                                 <include reference="hvZ-8u-7nX"/>
                                 <include reference="4nE-ju-yzP"/>
+                                <include reference="tVW-Pp-n5P"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="evF-uD-BHZ"/>
-                                <include reference="8gi-em-YpD"/>
-                                <include reference="YIR-r7-Xp6"/>
-                                <include reference="gdL-eY-PrA"/>
-                                <include reference="Gbj-Cl-dwF"/>
-                                <include reference="cA2-cy-bGO"/>
-                                <include reference="eNU-eA-hEI"/>
-                                <include reference="1cM-WD-sCU"/>
-                                <include reference="cKV-Jx-RjH"/>
-                                <include reference="iRa-7L-35T"/>
-                                <include reference="u06-BZ-QTY"/>
                                 <include reference="0Ou-JP-dGb"/>
                                 <include reference="Rl5-V2-ItQ"/>
                                 <include reference="CoA-yT-3Ew"/>
+                                <include reference="LDO-Z9-wXZ"/>
                                 <include reference="bnb-by-xYj"/>
                                 <include reference="dVy-s4-23b"/>
                                 <include reference="ekd-5b-lf9"/>
                                 <include reference="qdb-2o-nM7"/>
+                                <include reference="Gbj-Cl-dwF"/>
+                                <include reference="cA2-cy-bGO"/>
+                                <include reference="eNU-eA-hEI"/>
+                                <include reference="8gi-em-YpD"/>
+                                <include reference="YIR-r7-Xp6"/>
+                                <include reference="gdL-eY-PrA"/>
+                                <include reference="1cM-WD-sCU"/>
+                                <include reference="ZFO-fS-eqh"/>
+                                <include reference="cKV-Jx-RjH"/>
+                                <include reference="iRa-7L-35T"/>
+                                <include reference="u06-BZ-QTY"/>
+                                <include reference="evF-uD-BHZ"/>
                             </mask>
                         </variation>
                     </view>
@@ -173,6 +187,7 @@
                         <outlet property="bottomTextField" destination="8ui-9w-4z9" id="YdY-EQ-EmW"/>
                         <outlet property="cameraButton" destination="KbV-Kz-12d" id="C14-u3-ACD"/>
                         <outlet property="cancelButton" destination="6p6-lw-nAP" id="X3j-F9-z1w"/>
+                        <outlet property="directionsLabel" destination="tVW-Pp-n5P" id="5Fb-dE-otp"/>
                         <outlet property="imageView" destination="8qe-7G-nyE" id="1ch-3m-9WX"/>
                         <outlet property="navBar" destination="hvZ-8u-7nX" id="HBf-HV-XeR"/>
                         <outlet property="shareButton" destination="PaX-ky-cmO" id="UVE-1X-sqm"/>
@@ -344,7 +359,7 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <inset key="separatorInset" minX="160" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="separatorInset" minX="127" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>

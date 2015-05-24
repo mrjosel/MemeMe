@@ -28,7 +28,7 @@ class SentMemesTableViewController: UITableViewController, UITableViewDataSource
     @IBOutlet weak var addMemeButton: UIBarButtonItem!
     
     //shared array of memes
-    var memes : [MemeImage]!
+    var memes : [MemeImage]?
     
     override func viewWillAppear(animated: Bool) {
         //keep tabBar in view
@@ -39,12 +39,13 @@ class SentMemesTableViewController: UITableViewController, UITableViewDataSource
         let appDelegate = object as! AppDelegate
         self.memes = appDelegate.memes
         self.tableView.reloadData() //repopulates cells
+
     }
+
     
     override func viewDidAppear(animated: Bool) {
-        
-        //present Meme Editor if no memes in array, else do nothing
-        if self.memes.count == 0 {
+        //present Meme Editor if no memes in array, and load "No Saved Memes" to user, else do nothing
+        if self.memes?.count == 0 {
             var editVC = self.storyboard?.instantiateViewControllerWithIdentifier("MemeEditViewController") as! MemeEditViewController
             self.navigationController?.presentViewController(editVC, animated: true, completion: nil)
         }
@@ -53,7 +54,6 @@ class SentMemesTableViewController: UITableViewController, UITableViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-
     }
     
     @IBAction func returnToMemeEditor(sender: UIBarButtonItem) {
@@ -64,13 +64,13 @@ class SentMemesTableViewController: UITableViewController, UITableViewDataSource
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //returns size of memes array to populate table
-        return memes.count
+        return memes!.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         //sets cell based on meme in array
         let cell = tableView.dequeueReusableCellWithIdentifier("memeCell") as! MyCustomCell
-        let meme = self.memes[indexPath.row]
+        let meme = self.memes![indexPath.row]
         
         // Set the name and image
         cell.textLabel?.text = meme.topText + " " + meme.bottomText

@@ -22,7 +22,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var tabBarSpacingItemL: UIBarButtonItem! //not set in VC, default behavior is desired behavior
     @IBOutlet weak var tabBarSpacingItemR: UIBarButtonItem! //not set in VC, default behavior is desired behavior
-    
+    @IBOutlet weak var directionsLabel: UILabel!
     
     //ability to know if editing an existing meme or not
     var editMode: Bool!
@@ -52,6 +52,11 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
 
     
     override func viewWillAppear(animated: Bool) {
+        //get memes count to disable cancel button or not
+        let object = UIApplication.sharedApplication().delegate
+        let appDelegate = object as! AppDelegate
+        self.cancelButton.enabled = appDelegate.memes.count == 0 ? false : true
+        
         //limits camera button in simulator, only allows on HW where camera is suported
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         //subscribe to keyboard notifications to allow for resizing view when needed
@@ -66,6 +71,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
             self.topTextField.text = meme.topText
             self.bottomTextField.hidden = false
             self.bottomTextField.text = meme.bottomText
+            self.directionsLabel.hidden = true
         } else {
             //if meme optional is nil, then its a new meme and editMode is false
             self.editMode = false
@@ -77,9 +83,8 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func setDefaultParams() {   //various params that change depending on user activity, method allows user to restore defaults
-        //empty meme object and empty UIImageView
-        //self.memeImage = MemeImage()        //already set empty by class declaration, added here so user an restore defaults later
         self.imageView.image = UIImage()    //blank image
+        self.directionsLabel.hidden = false
         
         //default text, hidden prior to image selection
         self.topTextField.text = "TOP"
@@ -217,6 +222,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.imageView.image = image
             self.memeImage?.origImage = image
+            self.directionsLabel.hidden = true
         }
         self.dismissViewControllerAnimated(true, completion: nil)   //dismisses pickerController
         //reveals textFields and shareButton for editing
