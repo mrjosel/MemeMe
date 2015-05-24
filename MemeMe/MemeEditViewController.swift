@@ -42,15 +42,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
         NSStrokeWidthAttributeName : -3.0
     ]
-    
-    //TODO
-    //      - resize image in TableCell
-    //      - clean up methods
-    //      - blurry image after rendering?
-    //      - CODE CLEANUP
-
-
-    
+        
     override func viewWillAppear(animated: Bool) {
         //get memes count to disable cancel button or not
         let object = UIApplication.sharedApplication().delegate
