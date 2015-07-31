@@ -123,10 +123,8 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         //share MemeImages across all ViewControllers
         //if new meme, add to array.  if editing, overwrite that index
         if !editMode {
-            //appDelegate.memes.append(self.memeImage!)
-            self.memeImage!.sharedMemesArray("add", index: self.index)  //index ignored in method during "add"
+            self.memeImage!.sharedMemesArray("add", index: nil)  //index ignored in method during "add"
         } else {
-            //appDelegate.memes[index!] = self.memeImage!
             self.memeImage!.sharedMemesArray("edit", index: self.index!)
         }
 
