@@ -33,7 +33,11 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     let bottomTextFieldDelegate = MemeTextDelegate()
     
     //memeImage object
-    var memeImage: MemeImage?
+    var meme: Meme?
+    
+    //memeImage image path attributes, get from memeImage, or store for constructing a new memeImage
+    var origImagePath: String?
+    var memedImagePath: String?
     
     //set textField attributes (font, size, etc)
     let memeTextAttributes = [
@@ -55,10 +59,10 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         self.subscribeToKeyboardNotifications()
         
         //if meme is present, then editMode must be true, set the following params to allow editing
-        if let meme = self.memeImage {
+        if let meme = self.meme {
             self.editMode = true
             self.shareButton.enabled = true
-            self.imageView.image = meme.origImage
+            self.imageView.image = UIImage(contentsOfFile: meme.origImagePath)
             self.topTextField.hidden = false
             self.topTextField.text = meme.topText
             self.bottomTextField.hidden = false
@@ -118,18 +122,18 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     
     @IBAction func shareMeme(sender: UIBarButtonItem) {    //saves new memeImage and presents sharing activities to user
         //create meme object from view
-        self.memeImage = MemeImage(userTopText: self.topTextField.text, userBottomText: self.bottomTextField.text, userImage: self.imageView.image!, memedImage: self.generateMemedImage())
+        self.meme = Meme(userTopText: self.topTextField.text, userBottomText: self.bottomTextField.text, origImagePath: self.origImagePath!, memedImagePath: self.memedImagePath!)
         
         //share MemeImages across all ViewControllers
         //if new meme, add to array.  if editing, overwrite that index
         if !editMode {
-            self.memeImage!.sharedMemesArray("add", index: nil)  //index ignored in method during "add"
+            self.meme!.sharedMemesArray("add", index: nil)  //index ignored in method during "add"
         } else {
-            self.memeImage!.sharedMemesArray("edit", index: self.index!)
+            self.meme!.sharedMemesArray("edit", index: self.index!)
         }
 
         //create instance of UIActivityViewController, exclude various sharing activities
-        let activityVC : UIActivityViewController = UIActivityViewController(activityItems: [self.memeImage!.memedImage], applicationActivities: nil)  //need to fix applicationActivities
+        let activityVC : UIActivityViewController = UIActivityViewController(activityItems: [UIImage(contentsOfFile: self.memedImagePath!)!/*self.memeImage!.memedImage*/], applicationActivities: nil)  //need to fix applicationActivities
         activityVC.excludedActivityTypes = [UIActivityTypePostToVimeo, UIActivityTypePostToWeibo,
                                             UIActivityTypePostToTencentWeibo, UIActivityTypeAddToReadingList,
                                             UIActivityTypeAirDrop, UIActivityTypeAssignToContact]
@@ -162,6 +166,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         UIGraphicsBeginImageContext(self.view.frame.size)
         self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
         let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        //TODO:  MUST CREATE PATH TO IMAGE
         UIGraphicsEndImageContext()
         
         //restore toolbar and navbar
@@ -210,7 +215,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         //presents chosen image to view, reveals textFeilds for editing
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.imageView.image = image
-            self.memeImage?.origImage = image
+            self.origImagePath? = info[UIImagePickerControllerMediaURL] as? String  ?? ""
             self.directionsLabel.hidden = true
         }
         self.dismissViewControllerAnimated(true, completion: nil)   //dismisses pickerController

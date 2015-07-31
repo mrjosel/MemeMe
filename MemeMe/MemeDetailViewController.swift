@@ -14,7 +14,7 @@ class MemeDetailViewController: UIViewController {
     @IBOutlet weak var savedMemeImageView: UIImageView!
     
     //loaded meme for display and further sharing/editing
-    var loadedMeme: MemeImage!
+    var loadedMeme: Meme!
     var memeIndex: Int!     //index of meme from memes array
     
     override func viewWillAppear(animated: Bool) {
@@ -22,7 +22,7 @@ class MemeDetailViewController: UIViewController {
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
         self.loadedMeme = appDelegate.memes[memeIndex]
-        self.savedMemeImageView.image = self.loadedMeme.memedImage
+        self.savedMemeImageView.image = UIImage(contentsOfFile: self.loadedMeme.memedImagePath)
     }
 
     override func viewDidLoad() {
@@ -42,7 +42,7 @@ class MemeDetailViewController: UIViewController {
     func editMeme() {
         //present MemeEditVC
         var memeEditVC = self.storyboard?.instantiateViewControllerWithIdentifier("MemeEditViewController") as! MemeEditViewController
-        memeEditVC.memeImage = self.loadedMeme
+        memeEditVC.meme = self.loadedMeme
         memeEditVC.index = self.memeIndex
         self.navigationController?.presentViewController(memeEditVC, animated: true, completion: nil)
     }

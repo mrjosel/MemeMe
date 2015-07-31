@@ -30,7 +30,7 @@ class CoreDataStackManager {
     
     //managed object model
     lazy var managedObjectModel : NSManagedObjectModel = {
-        let url = NSBundle.mainBundle().URLForResource("Model", withExtension: ".momd")!
+        let url = NSBundle.mainBundle().URLForResource("MemeModel", withExtension: ".momd")!
         return NSManagedObjectModel(contentsOfURL: url)!
         }()
     
@@ -56,7 +56,7 @@ class CoreDataStackManager {
             error = NSError(domain: "persistenceStoreCoordinator", code: 9999, userInfo: errorDict as [NSObject : AnyObject])
             
             //report error
-            NSLog("Unresolved error \(error), \(error.userInfo!)")
+            NSLog("Unresolved error \(error), \(error!.userInfo!)")
             abort()
             
         }

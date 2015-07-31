@@ -22,7 +22,7 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
     @IBOutlet weak var addMemeButton: UIBarButtonItem!
     
     //shared array of memes
-    var memes : [MemeImage]!
+    var memes : [Meme]!
     
     override func viewWillAppear(animated: Bool) {
         //keep tabBar in view
@@ -104,7 +104,7 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
         //display text on top of original image for cleaner presentation
         cell.cellTopTextField.text = meme.topText
         cell.cellBottomTextField.text = meme.bottomText
-        cell.memeCellImageView.image = meme.origImage
+        cell.memeCellImageView.image = UIImage(contentsOfFile: meme.origImagePath)
         
         return cell
     }

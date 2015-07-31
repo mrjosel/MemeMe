@@ -28,7 +28,7 @@ class SentMemesTableViewController: UITableViewController, UITableViewDataSource
     @IBOutlet weak var addMemeButton: UIBarButtonItem!
     
     //shared array of memes
-    var memes : [MemeImage]?
+    var memes : [Meme]?
 
     override func viewWillAppear(animated: Bool) {
         //keep tabBar in view
@@ -73,7 +73,7 @@ class SentMemesTableViewController: UITableViewController, UITableViewDataSource
         
         // Set the name and image
         cell.textLabel?.text = meme.topText + " " + meme.bottomText
-        cell.imageView?.image = meme.origImage
+        cell.imageView?.image = UIImage(contentsOfFile: meme.origImagePath)
 
         return cell
     }
