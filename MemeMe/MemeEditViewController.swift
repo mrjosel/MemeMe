@@ -121,7 +121,11 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     @IBAction func shareMeme(sender: UIBarButtonItem) {    //saves new memeImage and presents sharing activities to user
+        
         //create meme object from view
+        let memedImage = self.generateMemedImage()
+        
+        //create meme object - TODO: Need memedImagePath!
         self.meme = Meme(userTopText: self.topTextField.text, userBottomText: self.bottomTextField.text, origImagePath: self.origImagePath!, memedImagePath: self.memedImagePath!)
         
         //share MemeImages across all ViewControllers
@@ -166,7 +170,6 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         UIGraphicsBeginImageContext(self.view.frame.size)
         self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
         let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
-        //TODO:  MUST CREATE PATH TO IMAGE
         UIGraphicsEndImageContext()
         
         //restore toolbar and navbar
@@ -213,9 +216,12 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         //presents chosen image to view, reveals textFeilds for editing
+//        println(info)
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.imageView.image = image
-            self.origImagePath? = info[UIImagePickerControllerMediaURL] as? String  ?? ""
+            var imageUrl: NSURL = info[UIImagePickerControllerReferenceURL] as! NSURL
+            self.origImagePath = imageUrl.absoluteString //info[UIImagePickerControllerReferenceURL] as? String ?? "no imagePath"
+            println(self.origImagePath)
             self.directionsLabel.hidden = true
         }
         self.dismissViewControllerAnimated(true, completion: nil)   //dismisses pickerController
