@@ -79,6 +79,7 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
         //sets cell based on meme in array
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("memeCollectionCell", forIndexPath: indexPath) as! MemeCollectionViewCell
         let meme = self.memes[indexPath.row]
+        let memeImageData = NSData(contentsOfFile: meme.origImagePath)
         
         //textField attributes
         let memeCellTextAttributes = [
@@ -104,7 +105,7 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
         //display text on top of original image for cleaner presentation
         cell.cellTopTextField.text = meme.topText
         cell.cellBottomTextField.text = meme.bottomText
-        cell.memeCellImageView.image = UIImage(contentsOfFile: meme.origImagePath)
+        cell.memeCellImageView.image = UIImage(data: memeImageData!)
         
         return cell
     }

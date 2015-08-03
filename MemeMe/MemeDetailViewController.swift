@@ -22,7 +22,10 @@ class MemeDetailViewController: UIViewController {
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
         self.loadedMeme = appDelegate.memes[memeIndex]
-        self.savedMemeImageView.image = UIImage(contentsOfFile: self.loadedMeme.memedImagePath)
+//        println(" CoreData appDir = \(CoreDataStackManager.sharedInstance().applicationDocumentsDirectory)")
+//        println("_origImagePath = \(loadedMeme.origImagePath)")
+//        println("memedImagePath = \(loadedMeme.memedImagePath)")
+        self.savedMemeImageView.image = UIImage(contentsOfFile: loadedMeme.memedImagePath)
     }
 
     override func viewDidLoad() {

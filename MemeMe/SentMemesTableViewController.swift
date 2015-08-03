@@ -70,10 +70,12 @@ class SentMemesTableViewController: UITableViewController, UITableViewDataSource
         //sets cell based on meme in array
         let cell = tableView.dequeueReusableCellWithIdentifier("memeCell") as! MyCustomCell
         let meme = self.memes![indexPath.row]
+        let memeImageData = NSData(contentsOfFile: meme.memedImagePath)
         
         // Set the name and image
         cell.textLabel?.text = meme.topText + " " + meme.bottomText
-        cell.imageView?.image = UIImage(contentsOfFile: meme.origImagePath)
+        
+        cell.imageView?.image = UIImage(data: memeImageData!)
 
         return cell
     }
