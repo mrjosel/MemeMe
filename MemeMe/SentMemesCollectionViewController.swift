@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Foundation
+import AssetsLibrary
 
 
 class MemeCollectionViewCell: UICollectionViewCell {
@@ -62,6 +64,70 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
         self.navigationController?.presentViewController(editVC, animated: true, completion: nil)
     }
     
+//    func getImageFromPath(path: String) -> (UIImage) {
+//        
+//        //make URLs from paths
+//        let imageURL = NSURL(string: path)
+//        
+//        //get data for images
+//        let imageData = NSData(contentsOfURL: imageURL!)
+//        
+//        //make UIImages from data
+//        let image = UIImage(data: imageData!)
+//        
+//        return image!
+//    }
+    
+//    func getImageFromPath(path: String) -> UIImage {
+//        //return image
+//        var returnImage: UIImage?
+//        
+//        // error for loading image from memory
+//        var loadError: NSError?
+//        
+//        //check if path is "asset"
+//        if let string = path.rangeOfString("asset", options: nil, range: nil, locale: nil)  {
+//            println("has asset in path")
+//            let assetsLibrary = ALAssetsLibrary()
+//            let url = NSURL(string: path)
+//            
+//            assetsLibrary.assetForURL(url!, resultBlock: {(asset) -> Void in
+//                println("in positive results block")
+//                returnImage = UIImage(CGImage: asset.defaultRepresentation().fullResolutionImage().takeUnretainedValue())
+//                println(returnImage)
+//                }, failureBlock: {(error) -> Void in
+//                    loadError = error
+//                    println("Error: \(loadError!.localizedDescription)")
+//            })
+//            println("finished assetsLibrary")
+//            //TODO: copy asset to documents directory, user may delete photo, need local copy for app
+//        } else {
+//            println("no asset in filepath")
+//            //make URLs from paths
+//            if let imageURL = NSURL(string: path) {
+//                //made URL
+//                if let imageData = NSData(contentsOfURL: imageURL) {
+//                    //made image Data
+//                    if let image = UIImage(data: imageData) {
+//                        //made image
+//                        returnImage = image
+//                    } else {
+//                        //image failed
+//                        println("Error: failed to make image from data")
+//                        return UIImage()
+//                    }
+//                } else {
+//                    println("Error: failed to get data from URL")
+//                    return UIImage()
+//                }
+//            } else {
+//                println("Error: failed to make url from path")
+//                return UIImage()
+//            }
+//        }
+//        return returnImage!
+//    }
+    
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //returns size of memes array to populate collection
@@ -79,7 +145,6 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
         //sets cell based on meme in array
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("memeCollectionCell", forIndexPath: indexPath) as! MemeCollectionViewCell
         let meme = self.memes[indexPath.row]
-        let memeImageData = NSData(contentsOfFile: meme.origImagePath)
         
         //textField attributes
         let memeCellTextAttributes = [
@@ -105,7 +170,7 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
         //display text on top of original image for cleaner presentation
         cell.cellTopTextField.text = meme.topText
         cell.cellBottomTextField.text = meme.bottomText
-        cell.memeCellImageView.image = UIImage(data: memeImageData!)
+        cell.memeCellImageView.image = self.getImageFromPath(meme.origImagePath)
         
         return cell
     }

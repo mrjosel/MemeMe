@@ -70,7 +70,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         if let meme = self.meme {
             self.editMode = true
             self.shareButton.enabled = true
-            self.imageView.image = UIImage(contentsOfFile: meme.origImagePath)
+            self.imageView.image = self.getImageFromPath(meme.origImagePath)
             self.topTextField.hidden = false
             self.topTextField.text = meme.topText
             self.bottomTextField.hidden = false
@@ -131,7 +131,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBAction func shareMeme(sender: UIBarButtonItem) {    //saves new memeImage and presents sharing activities to user
         //create meme object from view
         let memedImage = self.generateMemedImage()
-        self.memedImagePath = self.makeMemedImageFilePath()
+        self.memedImagePath = self.makeImageFilePath()
         
         //create meme object
         self.meme = Meme(userTopText: self.topTextField.text, userBottomText: self.bottomTextField.text, origImagePath: self.origImagePath!, memedImagePath: self.memedImagePath!)
@@ -153,7 +153,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         //dismisses activityVC and shows SentMemesTableViewController upon activity finish
         activityVC.completionWithItemsHandler = {activity, completed, items, error in
             if completed {
-                self.saveMemeToMemory(self.meme!, memeImage: memedImage) { success, error in
+                self.saveImageToMemory(memedImage, path: self.meme!.memedImagePath) { success, error in
                     if !success {
                         let alertVC = UIAlertController(title: "Error Saving", message: "Failed to Save Meme Image", preferredStyle: UIAlertControllerStyle.Alert)
                         self.presentViewController(alertVC, animated: true, completion: nil)
@@ -170,17 +170,17 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         self.presentViewController(activityVC, animated: true, completion: nil)
     }
     
-    func saveMemeToMemory(meme: Meme, memeImage: UIImage, completionHandler: (success: Bool, error: NSError?) -> Void) {
+    func saveImageToMemory(image: UIImage, path: String, completionHandler: (success: Bool, error: NSError?) -> Void) {
 
-        //create NSURL from memedImagePath param
-        let memedImagePathURL = NSURL(string: meme.memedImagePath)
+        //create NSURL from imagePath param
+        let imagePathURL = NSURL(string: path)
         
         //make png data from UIImage
-        let memedImageData = UIImagePNGRepresentation(memeImage)
+        let imageData = UIImagePNGRepresentation(image)
         
         //write png data to file
         var error: NSError? = nil
-        let success = memedImageData.writeToURL(memedImagePathURL!, options: NSDataWritingOptions.AtomicWrite, error: &error)
+        let success = imageData.writeToURL(imagePathURL!, options: NSDataWritingOptions.AtomicWrite, error: &error)
         if success {
             println("saved image to memory")
             completionHandler(success: true, error: nil)
@@ -217,21 +217,21 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         return memedImage
     }
     
-    func makeMemedImageFilePath() -> String {
+    func makeImageFilePath() -> String {
         //creates filename based on time and date (ensures no two files have the same name), get path and set it for memedImagePath
         let currentDateTime = NSDate()
         let formatter = NSDateFormatter()
         formatter.dateFormat = "ddMMyyyy-HHmmss"
-        let memedImageName = formatter.stringFromDate(currentDateTime) + ".png"
-        let memeFilePath = CoreDataStackManager.sharedInstance().applicationDocumentsDirectory.URLByAppendingPathComponent(memedImageName).absoluteString
-        let fileManager = NSFileManager.defaultManager()
-        if !fileManager.fileExistsAtPath(memeFilePath!) {
-            var error: NSError?
-            if !fileManager.createDirectoryAtPath(memeFilePath!, withIntermediateDirectories: true, attributes: nil, error: &error) {
-                println("Unable to create directory: \(error)")
-            }
-        }
-        return memeFilePath!
+        let imageName = formatter.stringFromDate(currentDateTime) + ".png"
+        let imageFilePath = CoreDataStackManager.sharedInstance().applicationDocumentsDirectory.URLByAppendingPathComponent(imageName).absoluteString
+//        let fileManager = NSFileManager.defaultManager()
+//        if !fileManager.fileExistsAtPath(memeFilePath!) {
+//            var error: NSError?
+//            if !fileManager.createDirectoryAtPath(memeFilePath!, withIntermediateDirectories: true, attributes: nil, error: &error) {
+//                println("Unable to create directory: \(error)")
+//            }
+//        }
+        return imageFilePath!
     }
     
     //-----Following methods all related to resizing view when keyboard appeara/dissappers-------------------------
@@ -273,8 +273,13 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         //presents chosen image to view, reveals textFeilds for editing
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.imageView.image = image
-            var imageUrl: NSURL = info[UIImagePickerControllerReferenceURL] as! NSURL
-            self.origImagePath = imageUrl.absoluteString //info[UIImagePickerControllerReferenceURL] as? String ?? "no imagePath"
+            self.origImagePath = self.makeImageFilePath()
+            self.saveImageToMemory(image, path: self.origImagePath!){ success, error in
+                if !success {
+                    let alertVC = UIAlertController(title: "Error Saving", message: "Failed to Save Meme Image", preferredStyle: UIAlertControllerStyle.Alert)
+                    self.presentViewController(alertVC, animated: true, completion: nil)
+                }
+            }
             self.directionsLabel.hidden = true
         }
         self.dismissViewControllerAnimated(true, completion: nil)   //dismisses pickerController
