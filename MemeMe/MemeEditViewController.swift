@@ -71,6 +71,8 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
             self.editMode = true
             self.shareButton.enabled = true
             self.imageView.image = self.getImageFromPath(meme.origImagePath)
+            self.memedImagePath = meme.memedImagePath
+            self.origImagePath = meme.origImagePath
             self.topTextField.hidden = false
             self.topTextField.text = meme.topText
             self.bottomTextField.hidden = false
