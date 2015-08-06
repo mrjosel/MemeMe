@@ -52,19 +52,34 @@ extension UIViewController {
     func deleteMemeImages(meme: Meme, completionHandler:(success: Bool, error: NSError?) -> Void) {
         
         //optional error
-        var error: NSError?
+        var origError: NSError?
+        var memedError: NSError?
         
         //get paths for meme images
         let origImagePath = meme.origImagePath
         let memedImagePath = meme.memedImagePath
         
+//        println("DELETEMETHODorigPath = \(/*self.memes![indexPath.row]*/origImagePath)")
+//        println("DELETEMETHODmemePath = \(/*self.memes![indexPath.row]*/memedImagePath)")
+        
+        //REFACTORING SAVE METHOD TO SEE IF SAVING EXISTS WITH PATH, THEN CHANGING PATH STRING IN MEME OBJECT
+        println("origImagePath exists?  \(NSFileManager.defaultManager().fileExistsAtPath(origImagePath))")
+        println("memedImagePath exists?  \(NSFileManager.defaultManager().fileExistsAtPath(memedImagePath))")
+        
         //attempt delete
-        let origResult = NSFileManager.defaultManager().removeItemAtPath(origImagePath, error: &error)
-        let memedResult = NSFileManager.defaultManager().removeItemAtPath(memedImagePath, error: &error)
+        let origResult = NSFileManager.defaultManager().removeItemAtPath(origImagePath, error: &origError)
+        let memedResult = NSFileManager.defaultManager().removeItemAtPath(memedImagePath, error: &memedError)
+        
+        println("origError = \(origError?.localizedDescription)")
+        println("memedError = \(memedError?.localizedDescription)")
+        
+        println("origResult = \(origResult)")
+        println("memedResult = \(memedResult)")
         
         if (origResult && memedResult) {
             completionHandler(success: true, error: nil)
         } else {
+            let error = NSError(domain: "Delete Failed", code: 999, userInfo: nil)
             completionHandler(success: false, error: error)
         }
     }

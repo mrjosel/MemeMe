@@ -88,16 +88,21 @@ class SentMemesTableViewController: UITableViewController, UITableViewDataSource
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        let meme = self.memes![indexPath.row]
+        println("origPath = \(/*self.memes![indexPath.row]*/meme.origImagePath)")
+        println("memePath = \(/*self.memes![indexPath.row]*/meme.memedImagePath)")
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            self.deleteMemeImages(self.memes![indexPath.row]){ success, error in
+            self.deleteMemeImages(/*self.memes![indexPath.row]*/meme){ success, error in
                 if success {
-                    self.memes?[indexPath.row].sharedMemesArray("delete", index: indexPath.row)
+                    /*self.memes![indexPath.row]*/meme.sharedMemesArray("delete", index: indexPath.row)
                     self.memes?.removeAtIndex(indexPath.row)
                     tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
                     self.returnToMemeEditor(self.addMemeButton) //returns to MemeEditVC
                 } else {
                     //TODO: find out why I can't delete things
                     println("Error: \(error!.localizedDescription)")
+//                    println("origPath = \(/*self.memes![indexPath.row]*/meme.origImagePath)")
+//                    println("memePath = \(/*self.memes![indexPath.row]*/meme.memedImagePath)")
 //                    let alertVC = UIAlertController(title: "Error Deleting", message: "Failed to Delete one or more Images", preferredStyle: UIAlertControllerStyle.Alert)
 //                    let okButton = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {action in
 //                        self.dismissViewControllerAnimated(true, completion: nil)

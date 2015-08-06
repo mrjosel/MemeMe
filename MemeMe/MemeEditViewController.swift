@@ -56,8 +56,8 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     ]
         
     override func viewWillAppear(animated: Bool) {
-        println("self.origPath = \(origImagePath)")
-        println("self.memedPath = \(memedImagePath)")
+//        println("self.origPath = \(origImagePath)")
+//        println("self.memedPath = \(memedImagePath)")
         
         //get memes count to disable cancel button or not
         let object = UIApplication.sharedApplication().delegate
@@ -81,8 +81,8 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
             self.bottomTextField.hidden = false
             self.bottomTextField.text = meme.bottomText
             self.directionsLabel.hidden = true
-            println("meme.origPath = \(meme.origImagePath)")
-            println("meme.memedPath = \(meme.memedImagePath)")
+//            println("meme.origPath = \(meme.origImagePath)")
+//            println("meme.memedPath = \(meme.memedImagePath)")
         } else {
             //if meme optional is nil, then its a new meme and editMode is false
             self.editMode = false
@@ -179,15 +179,18 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func saveImageToMemory(image: UIImage, path: String, completionHandler: (success: Bool, error: NSError?) -> Void) {
-
+        println("SAVEIMAGE path = \(path)")
         //create NSURL from imagePath param
-        let imagePathURL = NSURL(string: path)
+        let imagePathURL = NSURL(string: path, relativeToURL: CoreDataStackManager.sharedInstance().applicationDocumentsDirectory)
         
         //make png data from UIImage
         let imageData = UIImagePNGRepresentation(image)
         
         //write png data to file
         var error: NSError? = nil
+        
+        //TODO: attempt using imageData.writeToPath method (think I tried it before and it failed because of course it did)
+        //      HAVE TO RECONSTRUCT URLS FROM STRINGS, VICE VERSA, SEE OPEN PLAYGROUND FILE
         let success = imageData.writeToURL(imagePathURL!, options: NSDataWritingOptions.AtomicWrite, error: &error)
         if success {
             println("saved image to memory")
@@ -231,7 +234,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         let formatter = NSDateFormatter()
         formatter.dateFormat = "ddMMyyyy-HHmmss"
         let imageName = formatter.stringFromDate(currentDateTime) + ".png"
-        let imageFilePath = CoreDataStackManager.sharedInstance().applicationDocumentsDirectory.URLByAppendingPathComponent(imageName).absoluteString
+        let imageFilePath = CoreDataStackManager.sharedInstance().applicationDocumentsDirectory.URLByAppendingPathComponent(imageName).path
 //        let fileManager = NSFileManager.defaultManager()
 //        if !fileManager.fileExistsAtPath(memeFilePath!) {
 //            var error: NSError?
