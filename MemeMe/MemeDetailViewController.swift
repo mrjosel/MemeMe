@@ -22,9 +22,6 @@ class MemeDetailViewController: UIViewController {
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
         self.loadedMeme = appDelegate.memes[memeIndex]
-//        println(" CoreData appDir = \(CoreDataStackManager.sharedInstance().applicationDocumentsDirectory)")
-//        println("_origImagePath = \(loadedMeme.origImagePath)")
-//        println("memedImagePath = \(loadedMeme.memedImagePath)")
         self.savedMemeImageView.image = self.getImageFromPath(loadedMeme.memedImagePath)
     }
 

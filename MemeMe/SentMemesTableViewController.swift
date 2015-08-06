@@ -62,52 +62,6 @@ class SentMemesTableViewController: UITableViewController, UITableViewDataSource
         self.navigationController?.presentViewController(editVC, animated: true, completion: nil)
     }
     
-//    func getImageFromPath(path: String) -> UIImage {
-//        //return image
-//        var returnImage: UIImage?
-//        
-//        // error for loading image from memory
-//        var loadError: NSError?
-//        
-//        //check if path is "asset"
-//        if let string = path.rangeOfString("asset", options: nil, range: nil, locale: nil)  {
-//        
-//            let assetsLibrary = ALAssetsLibrary()
-//            let url = NSURL(string: path)
-//            
-//            assetsLibrary.assetForURL(url, resultBlock: {(asset) -> Void in
-//                returnImage = UIImage(CGImage: asset.defaultRepresentation().fullResolutionImage().takeUnretainedValue())
-//                }, failureBlock: {(error) -> Void in
-//                loadError = error
-//                    println("Error: \(loadError!.localizedDescription)")
-//            })
-//            
-//        } else {
-//        //make URLs from paths
-//            if let imageURL = NSURL(string: path) {
-//                //made URL
-//                if let imageData = NSData(contentsOfURL: imageURL) {
-//                    //made image Data
-//                    if let image = UIImage(data: imageData) {
-//                        //made image
-//                        returnImage = image
-//                    } else {
-//                        //image failed
-//                        println("Error: failed to make image from data")
-//                        return UIImage()
-//                    }
-//                } else {
-//                    println("Error: failed to get data from URL")
-//                    return UIImage()
-//                }
-//            } else {
-//                println("Error: failed to make url from path")
-//                return UIImage()
-//            }
-//        }
-//        return returnImage!
-//    }
-    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //returns size of memes array to populate table
         return memes!.count
@@ -135,10 +89,29 @@ class SentMemesTableViewController: UITableViewController, UITableViewDataSource
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            self.memes?[indexPath.row].sharedMemesArray("delete", index: indexPath.row)
-            self.memes?.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-            self.returnToMemeEditor(self.addMemeButton) //returns to MemeEditVC
+            self.deleteMemeImages(self.memes![indexPath.row]){ success, error in
+                if success {
+                    self.memes?[indexPath.row].sharedMemesArray("delete", index: indexPath.row)
+                    self.memes?.removeAtIndex(indexPath.row)
+                    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                    self.returnToMemeEditor(self.addMemeButton) //returns to MemeEditVC
+                } else {
+                    //TODO: find out why I can't delete things
+                    println("Error: \(error!.localizedDescription)")
+//                    let alertVC = UIAlertController(title: "Error Deleting", message: "Failed to Delete one or more Images", preferredStyle: UIAlertControllerStyle.Alert)
+//                    let okButton = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {action in
+//                        self.dismissViewControllerAnimated(true, completion: nil)
+//                    })
+//                    alertVC.addAction(okButton)
+//                    self.presentViewController(alertVC, animated: true, completion: nil)
+                    self.displayAlert(self)
+                    tableView.editing = false
+                }
+            }
+//            self.memes?[indexPath.row].sharedMemesArray("delete", index: indexPath.row)
+//            self.memes?.removeAtIndex(indexPath.row)
+//            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+//            self.returnToMemeEditor(self.addMemeButton) //returns to MemeEditVC
         }
     }
     

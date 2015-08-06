@@ -56,6 +56,9 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     ]
         
     override func viewWillAppear(animated: Bool) {
+        println("self.origPath = \(origImagePath)")
+        println("self.memedPath = \(memedImagePath)")
+        
         //get memes count to disable cancel button or not
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
@@ -78,6 +81,8 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
             self.bottomTextField.hidden = false
             self.bottomTextField.text = meme.bottomText
             self.directionsLabel.hidden = true
+            println("meme.origPath = \(meme.origImagePath)")
+            println("meme.memedPath = \(meme.memedImagePath)")
         } else {
             //if meme optional is nil, then its a new meme and editMode is false
             self.editMode = false
@@ -157,8 +162,9 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
             if completed {
                 self.saveImageToMemory(memedImage, path: self.meme!.memedImagePath) { success, error in
                     if !success {
-                        let alertVC = UIAlertController(title: "Error Saving", message: "Failed to Save Meme Image", preferredStyle: UIAlertControllerStyle.Alert)
-                        self.presentViewController(alertVC, animated: true, completion: nil)
+//                        let alertVC = UIAlertController(title: "Error Saving", message: "Failed to Save Meme Image", preferredStyle: UIAlertControllerStyle.Alert)
+//                        self.presentViewController(alertVC, animated: true, completion: nil)
+                        self.displayAlert(self)
                     }
                 }
 
@@ -278,8 +284,9 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
             self.origImagePath = self.makeImageFilePath()
             self.saveImageToMemory(image, path: self.origImagePath!){ success, error in
                 if !success {
-                    let alertVC = UIAlertController(title: "Error Saving", message: "Failed to Save Meme Image", preferredStyle: UIAlertControllerStyle.Alert)
-                    self.presentViewController(alertVC, animated: true, completion: nil)
+//                    let alertVC = UIAlertController(title: "Error Saving", message: "Failed to Save Meme Image", preferredStyle: UIAlertControllerStyle.Alert)
+//                    self.presentViewController(alertVC, animated: true, completion: nil)
+                    self.displayAlert(self)
                 }
             }
             self.directionsLabel.hidden = true

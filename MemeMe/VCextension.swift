@@ -18,20 +18,6 @@ extension UIViewController {
         // error for loading image from memory
         var loadError: NSError?
         
-        //check if path is "asset"
-//        if let string = path.rangeOfString("asset", options: nil, range: nil, locale: nil)  {
-//            
-//            let assetsLibrary = ALAssetsLibrary()
-//            let url = NSURL(string: path)
-//            
-//            assetsLibrary.assetForURL(url, resultBlock: {(asset) -> Void in
-//                returnImage = UIImage(CGImage: asset.defaultRepresentation().fullResolutionImage().takeUnretainedValue())
-//                }, failureBlock: {(error) -> Void in
-//                    loadError = error
-//                    println("Error: \(loadError!.localizedDescription)")
-//            })
-//            
-//        } else {
             //make URLs from paths
             if let imageURL = NSURL(string: path) {
                 //made URL
@@ -53,8 +39,34 @@ extension UIViewController {
                 println("Error: failed to make url from path")
                 return UIImage()
             }
-//        }
         return returnImage!
+    }
+    
+    func displayAlert(hostViewController: UIViewController) {
+        let alertVC = UIAlertController(title: "Error Deleting", message: "Failed to Delete one or more Images", preferredStyle: UIAlertControllerStyle.Alert)
+        let okButton = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        alertVC.addAction(okButton)
+        hostViewController.presentViewController(alertVC, animated: true, completion: nil)
+    }
+    
+    func deleteMemeImages(meme: Meme, completionHandler:(success: Bool, error: NSError?) -> Void) {
+        
+        //optional error
+        var error: NSError?
+        
+        //get paths for meme images
+        let origImagePath = meme.origImagePath
+        let memedImagePath = meme.memedImagePath
+        
+        //attempt delete
+        let origResult = NSFileManager.defaultManager().removeItemAtPath(origImagePath, error: &error)
+        let memedResult = NSFileManager.defaultManager().removeItemAtPath(memedImagePath, error: &error)
+        
+        if (origResult && memedResult) {
+            completionHandler(success: true, error: nil)
+        } else {
+            completionHandler(success: false, error: error)
+        }
     }
 
 }
