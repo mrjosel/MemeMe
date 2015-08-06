@@ -56,8 +56,6 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     ]
         
     override func viewWillAppear(animated: Bool) {
-//        println("self.origPath = \(origImagePath)")
-//        println("self.memedPath = \(memedImagePath)")
         
         //get memes count to disable cancel button or not
         let object = UIApplication.sharedApplication().delegate
@@ -81,8 +79,6 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
             self.bottomTextField.hidden = false
             self.bottomTextField.text = meme.bottomText
             self.directionsLabel.hidden = true
-//            println("meme.origPath = \(meme.origImagePath)")
-//            println("meme.memedPath = \(meme.memedImagePath)")
         } else {
             //if meme optional is nil, then its a new meme and editMode is false
             self.editMode = false
@@ -179,7 +175,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func saveImageToMemory(image: UIImage, path: String, completionHandler: (success: Bool, error: NSError?) -> Void) {
-        println("SAVEIMAGE path = \(path)")
+
         //create NSURL from imagePath param
         let imagePathURL = NSURL(string: path, relativeToURL: CoreDataStackManager.sharedInstance().applicationDocumentsDirectory)
         
@@ -235,13 +231,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         formatter.dateFormat = "ddMMyyyy-HHmmss"
         let imageName = formatter.stringFromDate(currentDateTime) + ".png"
         let imageFilePath = CoreDataStackManager.sharedInstance().applicationDocumentsDirectory.URLByAppendingPathComponent(imageName).path
-//        let fileManager = NSFileManager.defaultManager()
-//        if !fileManager.fileExistsAtPath(memeFilePath!) {
-//            var error: NSError?
-//            if !fileManager.createDirectoryAtPath(memeFilePath!, withIntermediateDirectories: true, attributes: nil, error: &error) {
-//                println("Unable to create directory: \(error)")
-//            }
-//        }
+
         return imageFilePath!
     }
     
