@@ -89,9 +89,9 @@ class SentMemesTableViewController: UITableViewController, UITableViewDataSource
         
         let meme = self.memes![indexPath.row]
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            self.deleteMemeImages(/*self.memes![indexPath.row]*/meme){ success, error in
+            self.deleteMemeImages(meme){ success, error in
                 if success {
-                    /*self.memes![indexPath.row]*/MemeData.sharedInstance().sharedMemesArray(meme, action: "delete", index: indexPath.row)
+                    MemeData.sharedInstance().sharedMemesArray(meme, action: "delete", index: indexPath.row)
                     self.memes?.removeAtIndex(indexPath.row)
                     tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
                     self.returnToMemeEditor(self.addMemeButton) //returns to MemeEditVC

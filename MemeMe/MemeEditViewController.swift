@@ -6,14 +6,6 @@
 //  Copyright (c) 2015 Brian Josel. All rights reserved.
 //
 
-//TODO:
-//refactoring halfway finished
-//---store memedImages in documents directory
-//---OR
-//------need MemeDetailViewController to "reconstruct" memedImage so storing UIImage not necessary
-//------must remove meme parameter of memedImagePath
-
-
 import UIKit
 
 class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -179,11 +171,10 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         //make png data from UIImage
         let imageData = UIImagePNGRepresentation(image)
         
-        //write png data to file
+        //error used for error pointer
         var error: NSError? = nil
         
-        //TODO: attempt using imageData.writeToPath method (think I tried it before and it failed because of course it did)
-        //      HAVE TO RECONSTRUCT URLS FROM STRINGS, VICE VERSA, SEE OPEN PLAYGROUND FILE
+        //write png data to file
         let success = imageData.writeToURL(imagePathURL!, options: NSDataWritingOptions.AtomicWrite, error: &error)
         if success {
             println("saved image to memory")
