@@ -36,9 +36,7 @@ class SentMemesTableViewController: UITableViewController, UITableViewDataSource
         self.tabBarController?.tabBar.hidden = false
         
         //load shared meme array each time view will appear
-        let object = UIApplication.sharedApplication().delegate
-        let appDelegate = object as! AppDelegate
-        self.memes = appDelegate.memes
+        self.memes = MemeData.sharedInstance().memes
         self.tableView.reloadData() //repopulates cells
 
     }
@@ -93,12 +91,13 @@ class SentMemesTableViewController: UITableViewController, UITableViewDataSource
         if editingStyle == UITableViewCellEditingStyle.Delete {
             self.deleteMemeImages(/*self.memes![indexPath.row]*/meme){ success, error in
                 if success {
-                    /*self.memes![indexPath.row]*/meme.sharedMemesArray("delete", index: indexPath.row)
+                    /*self.memes![indexPath.row]*/MemeData.sharedInstance().sharedMemesArray(meme, action: "delete", index: indexPath.row)
                     self.memes?.removeAtIndex(indexPath.row)
                     tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
                     self.returnToMemeEditor(self.addMemeButton) //returns to MemeEditVC
                 } else {
                     println("Error: \(error!.localizedDescription)")
+                    //display alert if fail
                     self.displayAlert(self)
                     tableView.editing = false
                 }

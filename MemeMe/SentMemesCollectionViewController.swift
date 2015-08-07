@@ -31,9 +31,7 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
         self.tabBarController?.tabBar.hidden = false
         
         //load shared meme array each time view will appear
-        let object = UIApplication.sharedApplication().delegate
-        let appDelegate = object as! AppDelegate
-        self.memes = appDelegate.memes
+        self.memes = MemeData.sharedInstance().memes
         self.collectionView!.reloadData()   //repopulates cells
     }
     

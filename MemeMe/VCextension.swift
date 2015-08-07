@@ -42,10 +42,19 @@ extension UIViewController {
         return returnImage!
     }
     
+    //alert function used across app
     func displayAlert(hostViewController: UIViewController) {
+        
+        //make alertview
         let alertVC = UIAlertController(title: "Error Deleting", message: "Failed to Delete one or more Images", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        //make OK button
         let okButton = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        
+        //add OK button to alertview
         alertVC.addAction(okButton)
+        
+        //display alert
         hostViewController.presentViewController(alertVC, animated: true, completion: nil)
     }
     

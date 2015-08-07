@@ -19,9 +19,7 @@ class MemeDetailViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         //display image everytime in case image was edited
-        let object = UIApplication.sharedApplication().delegate
-        let appDelegate = object as! AppDelegate
-        self.loadedMeme = appDelegate.memes[memeIndex]
+        self.loadedMeme = MemeData.sharedInstance().memes[memeIndex]
         self.savedMemeImageView.image = self.getImageFromPath(loadedMeme.memedImagePath)
     }
 

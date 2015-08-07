@@ -58,9 +58,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     override func viewWillAppear(animated: Bool) {
         
         //get memes count to disable cancel button or not
-        let object = UIApplication.sharedApplication().delegate
-        let appDelegate = object as! AppDelegate
-        self.cancelButton.enabled = appDelegate.memes.count == 0 ? false : true
+        self.cancelButton.enabled = MemeData.sharedInstance().memes.count == 0 ? false : true
         
         //limits camera button in simulator, only allows on HW where camera is suported
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
@@ -142,9 +140,9 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         //share MemeImages across all ViewControllers
         //if new meme, add to array.  if editing, overwrite that index
         if !editMode {
-            self.meme!.sharedMemesArray("add", index: nil)  //index ignored in method during "add"
+            MemeData.sharedInstance().sharedMemesArray(self.meme!, action: "add", index: nil)
         } else {
-            self.meme!.sharedMemesArray("edit", index: self.index!)
+            MemeData.sharedInstance().sharedMemesArray(self.meme!, action: "edit", index: self.index!)
         }
 
         //create instance of UIActivityViewController, exclude various sharing activities
@@ -158,8 +156,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
             if completed {
                 self.saveImageToMemory(memedImage, path: self.meme!.memedImagePath) { success, error in
                     if !success {
-//                        let alertVC = UIAlertController(title: "Error Saving", message: "Failed to Save Meme Image", preferredStyle: UIAlertControllerStyle.Alert)
-//                        self.presentViewController(alertVC, animated: true, completion: nil)
+                        //display alert if fail to save
                         self.displayAlert(self)
                     }
                 }
@@ -277,8 +274,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
             self.origImagePath = self.makeImageFilePath()
             self.saveImageToMemory(image, path: self.origImagePath!){ success, error in
                 if !success {
-//                    let alertVC = UIAlertController(title: "Error Saving", message: "Failed to Save Meme Image", preferredStyle: UIAlertControllerStyle.Alert)
-//                    self.presentViewController(alertVC, animated: true, completion: nil)
+                    //display alert if fail to save
                     self.displayAlert(self)
                 }
             }
