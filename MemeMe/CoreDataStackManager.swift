@@ -38,12 +38,13 @@ class CoreDataStackManager {
     lazy var persistenceStoreCoordinator : NSPersistentStoreCoordinator? = {
         //coordinator to return, based off managed object model
         var coordinator : NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent(SQLITE_FILE_NAME)
         
         //create error
         var error: NSError? = nil
         
         //check addition of persistent store is possible, if not, set coordinator to nil and report error
-        if coordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: self.applicationDocumentsDirectory, options: nil, error: &error) == nil {
+        if coordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil, error: &error) == nil {
             //could not add persistent store
             
             //set coordinator to nil
@@ -57,7 +58,7 @@ class CoreDataStackManager {
             
             //report error
             NSLog("Unresolved error \(error), \(error!.userInfo!)")
-            abort()
+//            abort()
             
         }
         

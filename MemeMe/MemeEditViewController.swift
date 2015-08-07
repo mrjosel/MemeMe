@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -46,6 +47,11 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
         NSStrokeWidthAttributeName : -3.0
     ]
+    
+    //context for persisting memes
+    var sharedContext: NSManagedObjectContext {
+        return CoreDataStackManager.sharedInstance().managedObjectContext!
+    }
         
     override func viewWillAppear(animated: Bool) {
         
@@ -127,7 +133,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         self.memedImagePath = self.makeImageFilePath()
         
         //create meme object
-        self.meme = Meme(userTopText: self.topTextField.text, userBottomText: self.bottomTextField.text, origImagePath: self.origImagePath!, memedImagePath: self.memedImagePath!)
+        self.meme = Meme(userTopText: self.topTextField.text, userBottomText: self.bottomTextField.text, origImagePath: self.origImagePath!, memedImagePath: self.memedImagePath!, context: self.sharedContext)
         
         //share MemeImages across all ViewControllers
         //if new meme, add to array.  if editing, overwrite that index
