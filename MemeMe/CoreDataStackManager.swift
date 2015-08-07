@@ -87,6 +87,7 @@ class CoreDataStackManager {
     
     //save latest context
     func saveContext() {
+        println("saving context")
         
         //get managedObjectContext if it exists
         if let context = self.managedObjectContext {
@@ -98,8 +99,8 @@ class CoreDataStackManager {
             if context.hasChanges && !context.save(&error) {
                 NSLog("Unresolved error \(error), \(error?.userInfo)")
                 abort()
-            }
-            //else implies successful save
+            } //else implies successful save
+            println("successfully saved context")
         } else {
             NSLog("No managedObjectContext")
             abort()

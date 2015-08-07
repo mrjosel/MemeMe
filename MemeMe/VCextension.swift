@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import AssetsLibrary
+import CoreData
 
 extension UIViewController {
     func getImageFromPath(path: String) -> UIImage {
@@ -58,7 +58,7 @@ extension UIViewController {
         hostViewController.presentViewController(alertVC, animated: true, completion: nil)
     }
     
-    func deleteMemeImages(meme: Meme, completionHandler:(success: Bool, error: NSError?) -> Void) {
+    func deleteMemeImages(meme: Meme, context: NSManagedObjectContext, completionHandler:(success: Bool, error: NSError?) -> Void) {
         
         //optional error
         var origError: NSError?
@@ -74,6 +74,8 @@ extension UIViewController {
         
         if (origResult && memedResult) {
             completionHandler(success: true, error: nil)
+            context.deleteObject(meme)
+            CoreDataStackManager.sharedInstance().saveContext()
         } else {
             let error = NSError(domain: "Delete Failed", code: 999, userInfo: nil)
             completionHandler(success: false, error: error)

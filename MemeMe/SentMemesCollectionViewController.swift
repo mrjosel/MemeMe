@@ -31,7 +31,7 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
         self.tabBarController?.tabBar.hidden = false
         
         //load shared meme array each time view will appear
-        self.memes = MemeData.sharedInstance().memes
+//        self.memes = MemeData.sharedInstance().memes
         self.collectionView!.reloadData()   //repopulates cells
     }
     
@@ -40,7 +40,7 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
         //SHOULD NEVER ARRIVE HERE
         //TABLE VC IS INITIAL VC
         //THIS IS HERE FOR SAFETY
-        if self.memes.count == 0 {
+        if /*self.memes.count*/ MemeData.sharedInstance().memes.count == 0 {
             var editVC = self.storyboard?.instantiateViewControllerWithIdentifier("MemeEditViewController") as! MemeEditViewController
             self.navigationController?.presentViewController(editVC, animated: true, completion: nil)
         }
@@ -65,7 +65,7 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //returns size of memes array to populate collection
-        return self.memes.count
+        return /*self.memes.count*/MemeData.sharedInstance().memes.count
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath:NSIndexPath) {
@@ -78,7 +78,7 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         //sets cell based on meme in array
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("memeCollectionCell", forIndexPath: indexPath) as! MemeCollectionViewCell
-        let meme = self.memes[indexPath.row]
+        let meme = /*self.memes*/MemeData.sharedInstance().memes[indexPath.row]
         
         //textField attributes
         let memeCellTextAttributes = [

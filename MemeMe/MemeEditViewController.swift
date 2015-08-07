@@ -36,9 +36,11 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     //memeImage object
     var meme: Meme?
     
-    //memeImage image path attributes, get from memeImage, or store for constructing a new memeImage
+    //memeImage image path attributes and images, get from memeImage, or store for constructing a new memeImage
     var origImagePath: String?
     var memedImagePath: String?
+    var origImage: UIImage?
+    var memedImage: UIImage?
     
     //set textField attributes (font, size, etc)
     let memeTextAttributes = [
@@ -129,7 +131,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     
     @IBAction func shareMeme(sender: UIBarButtonItem) {    //saves new memeImage and presents sharing activities to user
         //create meme object from view
-        let memedImage = self.generateMemedImage()
+        self.memedImage = self.generateMemedImage()
         self.memedImagePath = self.makeImageFilePath()
         
         //create meme object
@@ -144,7 +146,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         }
 
         //create instance of UIActivityViewController, exclude various sharing activities
-        let activityVC : UIActivityViewController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)  //need to fix applicationActivities
+        let activityVC : UIActivityViewController = UIActivityViewController(activityItems: [self.memedImage!], applicationActivities: nil)
         activityVC.excludedActivityTypes = [UIActivityTypePostToVimeo, UIActivityTypePostToWeibo,
                                             UIActivityTypePostToTencentWeibo, UIActivityTypeAddToReadingList,
                                             UIActivityTypeAirDrop, UIActivityTypeAssignToContact]
@@ -152,12 +154,23 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         //dismisses activityVC and shows SentMemesTableViewController upon activity finish
         activityVC.completionWithItemsHandler = {activity, completed, items, error in
             if completed {
-                self.saveImageToMemory(memedImage, path: self.meme!.memedImagePath) { success, error in
+                //save orig image, if successful then save memedImage, alert if either fail
+                self.saveImageToMemory(self.origImage!, path: self.meme!.origImagePath) { success, error in
                     if !success {
                         //display alert if fail to save
                         self.displayAlert(self)
+                    } else {
+                        self.saveImageToMemory(self.memedImage!, path: self.meme!.memedImagePath) { success, error in
+                            if !success {
+                                //display alert if fail to save
+                                self.displayAlert(self)
+                            } else {
+                                CoreDataStackManager.sharedInstance().saveContext()
+                            }
+                        }
                     }
                 }
+                
 
                 //dismiss VC
                 activityVC.dismissViewControllerAnimated(true, completion: nil)
@@ -269,12 +282,13 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.imageView.image = image
             self.origImagePath = self.makeImageFilePath()
-            self.saveImageToMemory(image, path: self.origImagePath!){ success, error in
-                if !success {
-                    //display alert if fail to save
-                    self.displayAlert(self)
-                }
-            }
+//            self.saveImageToMemory(image, path: self.origImagePath!){ success, error in
+//                if !success {
+//                    //display alert if fail to save
+//                    self.displayAlert(self)
+//                }
+//            }
+            self.origImage = image
             self.directionsLabel.hidden = true
         }
         self.dismissViewControllerAnimated(true, completion: nil)   //dismisses pickerController
