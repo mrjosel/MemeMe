@@ -8,7 +8,7 @@
 
 import UIKit
 import Foundation
-import AssetsLibrary
+import CoreData
 
 
 class MemeCollectionViewCell: UICollectionViewCell {
@@ -26,12 +26,17 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
     //shared array of memes
     var memes : [Meme]!
     
+    //shared context
+    var sharedContext : NSManagedObjectContext {
+        return CoreDataStackManager.sharedInstance().managedObjectContext!
+    }
+    
     override func viewWillAppear(animated: Bool) {
+        
         //keep tabBar in view
         self.tabBarController?.tabBar.hidden = false
         
         //load shared meme array each time view will appear
-//        self.memes = MemeData.sharedInstance().memes
         self.collectionView!.reloadData()   //repopulates cells
     }
     
@@ -40,7 +45,7 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
         //SHOULD NEVER ARRIVE HERE
         //TABLE VC IS INITIAL VC
         //THIS IS HERE FOR SAFETY
-        if /*self.memes.count*/ MemeData.sharedInstance().memes.count == 0 {
+        if MemeData.sharedInstance().memes.count == 0 {
             var editVC = self.storyboard?.instantiateViewControllerWithIdentifier("MemeEditViewController") as! MemeEditViewController
             self.navigationController?.presentViewController(editVC, animated: true, completion: nil)
         }
@@ -49,7 +54,32 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        //fetch all memes
+        MemeData.sharedInstance().memes = self.fetchAllMemes()
     }
+    
+    //method to fetch all persisted memes
+    func fetchAllMemes() -> [Meme]{
+        
+        //error pointer
+        let error: NSErrorPointer = nil
+        
+        //create the fetch request
+        let request = NSFetchRequest(entityName: "Meme")
+        
+        //execute the fetch request
+        let results = sharedContext.executeFetchRequest(request, error: error)
+        
+        //check for errors
+        if error != nil {
+            println("Error in fetchAllMemes: \(error)")
+        }
+        
+        //return results, cast to an array of memes
+        return results as! [Meme]
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -65,7 +95,7 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //returns size of memes array to populate collection
-        return /*self.memes.count*/MemeData.sharedInstance().memes.count
+        return MemeData.sharedInstance().memes.count
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath:NSIndexPath) {
@@ -78,7 +108,7 @@ class SentMemesCollectionViewController: UICollectionViewController, UICollectio
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         //sets cell based on meme in array
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("memeCollectionCell", forIndexPath: indexPath) as! MemeCollectionViewCell
-        let meme = /*self.memes*/MemeData.sharedInstance().memes[indexPath.row]
+        let meme = MemeData.sharedInstance().memes[indexPath.row]
         
         //textField attributes
         let memeCellTextAttributes = [

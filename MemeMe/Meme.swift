@@ -57,12 +57,4 @@ class Meme: NSManagedObject {
         self.memedImagePath = memedImagePath
         
     }
-    
-//    //Initialize with no params, should not ever need this
-//    init () {
-//        self.topText = ""
-//        self.bottomText = ""
-//        self.origImagePath = "" //UIImage()  //already implicitly unwrapped
-//        self.memedImagePath = "" //UIImage()
-//    }
 }

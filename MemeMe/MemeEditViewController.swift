@@ -33,7 +33,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     let topTextFieldDelegate = MemeTextDelegate()
     let bottomTextFieldDelegate = MemeTextDelegate()
     
-    //memeImage object
+    //meme object
     var meme: Meme?
     
     //memeImage image path attributes and images, get from memeImage, or store for constructing a new memeImage
@@ -132,18 +132,21 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     @IBAction func shareMeme(sender: UIBarButtonItem) {    //saves new memeImage and presents sharing activities to user
+        
         //create meme object from view
         self.memedImage = self.generateMemedImage()
         self.memedImagePath = self.makeImageFilePath()
         
-        //create meme object
-        self.meme = Meme(userTopText: self.topTextField.text, userBottomText: self.bottomTextField.text, origImagePath: self.origImagePath!, memedImagePath: self.memedImagePath!, context: self.sharedContext)
-        
         //share MemeImages across all ViewControllers
         //if new meme, add to array.  if editing, overwrite that index
-        if !editMode {
+        if !editMode! {
+            //create meme object
+            self.meme = Meme(userTopText: self.topTextField.text, userBottomText: self.bottomTextField.text, origImagePath: self.origImagePath!, memedImagePath: self.memedImagePath!, context: self.sharedContext)
             MemeData.sharedInstance().sharedMemesArray(self.meme!, action: "add", index: nil)
         } else {
+            self.meme?.memedImagePath = self.memedImagePath!
+            self.meme?.topText = self.topTextField.text
+            self.meme?.bottomText = self.bottomTextField.text
             MemeData.sharedInstance().sharedMemesArray(self.meme!, action: "edit", index: self.index!)
         }
 

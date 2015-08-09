@@ -58,7 +58,7 @@ class CoreDataStackManager {
             
             //report error
             NSLog("Unresolved error \(error), \(error!.userInfo!)")
-//            abort()
+            abort()
             
         }
         

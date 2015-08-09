@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class MemeDetailViewController: UIViewController {
     
@@ -16,6 +17,11 @@ class MemeDetailViewController: UIViewController {
     //loaded meme for display and further sharing/editing
     var loadedMeme: Meme!
     var memeIndex: Int!     //index of meme from memes array
+    
+    //shared context
+    var sharedContext: NSManagedObjectContext {
+        return CoreDataStackManager.sharedInstance().managedObjectContext!
+    }
     
     override func viewWillAppear(animated: Bool) {
         //display image everytime in case image was edited
@@ -42,6 +48,7 @@ class MemeDetailViewController: UIViewController {
         var memeEditVC = self.storyboard?.instantiateViewControllerWithIdentifier("MemeEditViewController") as! MemeEditViewController
         memeEditVC.meme = self.loadedMeme
         memeEditVC.index = self.memeIndex
+        
         self.navigationController?.presentViewController(memeEditVC, animated: true, completion: nil)
     }
     
